@@ -13,3 +13,4 @@ CombineData <- function(univ.name) {
 }
 
 full.draft.data <- lapply(as.character(official.draft.data$College.Univ), CombineData) %>% bind_rows()
+write.csv(full.draft.data, file = 'Final_Draft_Data.csv', row.names = FALSE)
