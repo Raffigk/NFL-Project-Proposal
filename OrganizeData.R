@@ -40,11 +40,11 @@ NewPos <- function(pos) {
 
 # Takes in a position to determine which team a player is on 
 GetTeam <- function(pos) {
-  if (length(grep(pos, defense.team)) == 0) {
+  if (length(grep(pos, defense.team)) != 0) {
     team = 'Defense'
-  } else if (length(grep(pos, offense.team)) == 0) {
+  } else if (length(grep(pos, offense.team)) != 0) {
     team = 'Offense'
-  } else if (length(grep(pos, special.team)) == 0) {
+  } else if (length(grep(pos, special.team)) != 0) {
     team = 'Special Teams'
   } else {
     team = NULL
