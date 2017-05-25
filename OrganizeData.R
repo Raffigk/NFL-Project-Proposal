@@ -52,11 +52,6 @@ GetTeam <- function(pos) {
   return (team)
 }
 
-length(grep('DFF', defense.team))
-
-grep('DFF', defense.team)
-gsub('DT', defense.team)
-grepl('DT', defense.team)
 
 #Computing Averages for Statistics
 
