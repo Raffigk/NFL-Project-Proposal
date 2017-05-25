@@ -3,6 +3,7 @@ library(dplyr)
 # Scatterplot that maps position to type of statistic, based on round pick
 
 full.draft.data <- read.csv('data/Final_Draft_Data.csv', stringsAsFactors = FALSE)
+#Data for this chart
 draft.data <- full.draft.data %>% 
   select(Year, Rnd, Pick, Player, Pos, Cmp, Pass_Att, Pass_Yds, Pass_Int, Rush_Att, Rush_Yds, Rush_TDs, Rec, Rec_Yds, Rec_Tds, Tkl, Def_Int, Sk)
 
@@ -19,11 +20,21 @@ draft.data <- draft.data %>%
 # Since some positions can be referred to general positions, RefinePos(pos) generalizes each specific position
 RefinePos <- function(pos) {
   if (pos == 'MLB' | pos == 'ILB' | pos == 'OLB') {
-    draft.data[[pos]] = 'LB'
+    draft.data[pos] <- 'LB'
   } else if (pos == 'FS' | pos == 'SS') {
-    draft.data[[pos]] = 'S'
+    draft.data[pos] <- 'S'
   } else if (pos == 'C' | pos == 'G' | pos == 'T' | pos == 'NT') {
-    draft.data[[pos]] = 'OL'
+    draft.data[pos] <- 'OL'
+  }
+}
+
+NewPos <- function(pos) {
+  if (pos == 'MLB' | pos == 'ILB' | pos == 'OLB') {
+    draft.data$Position = 'LB'
+  } else if (pos == 'FS' | pos == 'SS') {
+    draft.data$Position = 'S'
+  } else if (pos == 'C' | pos == 'G' | pos == 'T' | pos == 'NT') {
+    draft.data$Position = 'OL'
   }
 }
 
@@ -34,7 +45,7 @@ GetTeam <- function(pos) {
   } else if (length(grep(pos, offense.team)) == 0) {
     team = 'Offense'
   } else if (length(grep(pos, special.team)) == 0) {
-    team = 'Special'
+    team = 'Special Teams'
   } else {
     team = NULL
   }
@@ -47,5 +58,6 @@ grep('DFF', defense.team)
 gsub('DT', defense.team)
 grepl('DT', defense.team)
 
+#Computing Averages for Statistics
 
 
