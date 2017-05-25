@@ -7,7 +7,8 @@ shinyUI(fluidPage(
   sidebarLayout(      
     
     sidebarPanel(
-      selectInput(inputId = "Team", "Position Type:", choices = c('Offense' = 'Offense', 'Defense' = 'Defense', 'Special Teams' = 'Special Teams')),
+      selectInput(inputId = "Team", "Position Type:", 
+                  choices = c('Offense' = 'Offense', 'Defense' = 'Defense', 'Special Teams' = 'Special Teams')),
       #Panel for Offense
       conditionalPanel(
         condition = 'input.Offense == true', 
@@ -16,7 +17,8 @@ shinyUI(fluidPage(
         )
       #Create Conditional Panel for Defense and Special Teams
       ),
-      selectInput(inputId = "Pos", "Position:", choices = c('Safety' = c('S', 'FS', 'SS'), 'Cornerback' = 'CB', 'Defensive Back' = 'DB', 'Defensive End' = 'DE', 'Fullback' = 'FB', 'Free Safety' = 'FS', 'Kicker' = 'K', 'Return Specialist' = 'KR', 'Punter' = 'P'),
+      selectInput(inputId = "Pos", "Position:", 
+                  choices = c('Safety' = c('S', 'FS', 'SS'), 'Cornerback' = 'CB', 'Defensive Back' = 'DB', 'Defensive End' = 'DE', 'Fullback' = 'FB', 'Free Safety' = 'FS', 'Kicker' = 'K', 'Return Specialist' = 'KR', 'Punter' = 'P'),
       hr(),
       helpText('Any notes we need to put about the selections')
     ),
