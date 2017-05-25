@@ -6,18 +6,14 @@ full.draft.data <- read.csv('data/Final_Draft_Data.csv', stringsAsFactors = FALS
 draft.data <- full.draft.data %>% 
   select(Year, Rnd, Pick, Player, Pos, Cmp, Pass_Att, Pass_Yds, Pass_Int, Rush_Att, Rush_Yds, Rush_TDs, Rec, Rec_Yds, Rec_Tds, Tkl, Def_Int, Sk)
 
-
 defense.team <- c('DT', 'DE', 'DB', 'MLB', 'OLB', 'CB', 'S', 'FS', 'ILB', 'DL', 'SS', 'LB')
 offense.team <- c('C', 'G', 'T', 'QB', 'RB', 'WR', 'TE', 'OL', 'NT', 'FB')
 special.team <- c('K', 'H', 'LS', 'P', 'KOS', 'KR', 'PR')
 
-#MLB/ILB/OLB/LB
-#FS/S/SS
-#C/G/T/NT/OL
-
 
 # Add column to dataframe that includes specific positions
-draft.data <- lapply(draft.data$Pos, RefinePos)
+draft.data <- draft.data %>% 
+  mutate(Team= (lapply(draft.data$Pos, GetTeam)))
 
 
 # Since some positions can be referred to general positions, RefinePos(pos) generalizes each specific position
@@ -31,8 +27,25 @@ RefinePos <- function(pos) {
   }
 }
 
-test <- data.frame(one = c(1, 2, 4), two = c(1, 3, 4), three = c(2, 2, 5))
-if test$one[1] == 1 
+# Takes in a position to determine which team a player is on 
+GetTeam <- function(pos) {
+  if (length(grep(pos, defense.team)) == 0) {
+    team = 'Defense'
+  } else if (length(grep(pos, offense.team)) == 0) {
+    team = 'Offense'
+  } else if (length(grep(pos, special.team)) == 0) {
+    team = 'Special'
+  } else {
+    team = NULL
+  }
+  return (team)
+}
+
+length(grep('DFF', defense.team))
+
+grep('DFF', defense.team)
+gsub('DT', defense.team)
+grepl('DT', defense.team)
 
 
 
