@@ -48,3 +48,10 @@ draft.data <- draft.data %>%
   mutate(GenPos = (lapply(draft.data$Pos, Agg_Position)))
 
 
+# scatterplot: x axis = set of years from 1985-2015 (30 pts for each statistic)
+# user selects position and statistic
+# each datapoint represents one year
+# calculate average of statistic per year
+# y axis = statistic 
+
+
