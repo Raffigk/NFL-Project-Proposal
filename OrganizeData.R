@@ -1,7 +1,7 @@
 library(dplyr)
 
 # Scatterplot that maps position to type of statistic, based on round pick
-
+#setwd("~/Desktop/INFO201/NFL-Project-Proposal")
 full.draft.data <- read.csv('data/Final_Draft_Data.csv', stringsAsFactors = FALSE)
 #Data for this chart
 draft.data <- full.draft.data %>% 
@@ -10,11 +10,6 @@ draft.data <- full.draft.data %>%
 defense.team <- c('DT', 'DE', 'DB', 'MLB', 'OLB', 'CB', 'S', 'FS', 'ILB', 'DL', 'SS', 'LB')
 offense.team <- c('C', 'G', 'T', 'QB', 'RB', 'WR', 'TE', 'OL', 'NT', 'FB')
 special.team <- c('K', 'H', 'LS', 'P', 'KOS', 'KR', 'PR')
-
-
-# Add column to dataframe that includes specific positions
-draft.data <- draft.data %>% 
-  mutate(Team= (lapply(draft.data$Pos, GetTeam)))
 
 # Takes in a position to determine which team a player is on 
 GetTeam <- function(pos) {
@@ -30,6 +25,10 @@ GetTeam <- function(pos) {
   return (team)
 }
 
+# Add column to dataframe that includes specific positions
+draft.data <- draft.data %>% 
+  mutate(Team= (lapply(draft.data$Pos, GetTeam)))
+
 #Adding column to make calculations easier
 Agg_Position <- function(pos) {
   if (pos == 'LB' | pos == 'MLB' | pos == 'ILB' | pos == 'OLB') {
@@ -44,6 +43,8 @@ Agg_Position <- function(pos) {
   return(new.pos)
 }
 
-
+# Because some positions are very specific, add a column to the dataframe that provides a generalized position for each player
+draft.data <- draft.data %>%
+  mutate(GenPos = (lapply(draft.data$Pos, Agg_Position)))
 
 
