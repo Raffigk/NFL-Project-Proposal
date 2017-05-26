@@ -16,28 +16,6 @@ special.team <- c('K', 'H', 'LS', 'P', 'KOS', 'KR', 'PR')
 draft.data <- draft.data %>% 
   mutate(Team= (lapply(draft.data$Pos, GetTeam)))
 
-
-# Since some positions can be referred to general positions, RefinePos(pos) generalizes each specific position
-RefinePos <- function(pos) {
-  if (pos == 'MLB' | pos == 'ILB' | pos == 'OLB') {
-    draft.data[pos] <- 'LB'
-  } else if (pos == 'FS' | pos == 'SS') {
-    draft.data[pos] <- 'S'
-  } else if (pos == 'C' | pos == 'G' | pos == 'T' | pos == 'NT') {
-    draft.data[pos] <- 'OL'
-  }
-}
-
-NewPos <- function(pos) {
-  if (pos == 'MLB' | pos == 'ILB' | pos == 'OLB') {
-    draft.data$Position = 'LB'
-  } else if (pos == 'FS' | pos == 'SS') {
-    draft.data$Position = 'S'
-  } else if (pos == 'C' | pos == 'G' | pos == 'T' | pos == 'NT') {
-    draft.data$Position = 'OL'
-  }
-}
-
 # Takes in a position to determine which team a player is on 
 GetTeam <- function(pos) {
   if (length(grep(pos, defense.team)) != 0) {
@@ -52,8 +30,20 @@ GetTeam <- function(pos) {
   return (team)
 }
 
+#Adding column to make calculations easier
+Agg_Position <- function(pos) {
+  if (pos == 'LB' | pos == 'MLB' | pos == 'ILB' | pos == 'OLB') {
+    new.pos = 'LB'
+  } else if (pos == 'S' | pos == 'SS' | pos == 'FS') {
+    new.pos = 'S'
+  } else if (pos == 'CB' | pos == 'DB') {
+    new.pos = 'CB'
+  } else {
+    new.pos = pos
+  }
+  return(new.pos)
+}
 
-#Computing Averages for Statistics
 
 
 
