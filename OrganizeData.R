@@ -6,7 +6,7 @@ full.draft.data <- read.csv('data/Final_Draft_Data.csv', stringsAsFactors = FALS
 #Data for this chart
 draft.data <- full.draft.data %>% 
   select(Year, Rnd, Pick, Player, Pos, Cmp, Pass_Att, Pass_Yds, Pass_Int, Rush_Att, Rush_Yds, Rush_TDs, Rec, Rec_Yds, Rec_Tds, Tkl, Def_Int, Sk)
-
+TeamTe
 defense.team <- c('DT', 'DE', 'DB', 'MLB', 'OLB', 'CB', 'S', 'FS', 'ILB', 'DL', 'SS', 'LB')
 offense.team <- c('C', 'G', 'T', 'QB', 'RB', 'WR', 'TE', 'OL', 'NT', 'FB')
 special.team <- c('K', 'H', 'LS', 'P', 'KOS', 'KR', 'PR')
@@ -47,11 +47,9 @@ Agg_Position <- function(pos) {
 draft.data <- draft.data %>%
   mutate(GenPos = (lapply(draft.data$Pos, Agg_Position)))
 
+all.years <- unique(draft.data$Year)
 
-# scatterplot: x axis = set of years from 1985-2015 (30 pts for each statistic)
-# user selects position and statistic
-# each datapoint represents one year
-# calculate average of statistic per year
-# y axis = statistic 
+
+
 
 
