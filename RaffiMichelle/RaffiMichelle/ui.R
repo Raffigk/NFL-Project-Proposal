@@ -7,15 +7,9 @@ shinyUI(fluidPage(
   sidebarLayout(      
     
     sidebarPanel(
-<<<<<<< HEAD
-      selectInput(inputId = "Team", "Position Type:", 
-                  choices = c('Offense' = 'Offense', 'Defense' = 'Defense', 'Special Teams' = 'Special Teams')),
-      #Panel for Offense
-=======
       #Select Position Type
       selectInput(inputId = "Team", "Position Type:", choices = c('Offense' = 'Offense', 'Defense' = 'Defense'), selected = 'Offense'),
       #If the Position Type is Offense and Position is QB
->>>>>>> Completed Scatter Plot UI
       conditionalPanel(
         condition = "input.Team == 'Offense'", 
         selectInput(inputId = 'Pos', 'Position:', choices = c('Quarterback' = 'QB', 'Running Back' = 'RB', 'Tight End' = 'TE', 'Wide Receiver' = 'WR', 'Fullback' = 'FB'), selected = 'Quarterback'),
@@ -34,18 +28,12 @@ shinyUI(fluidPage(
           selectInput(inputId = 'Statistic', 'Statistic:', choices = c('Receptions' = 'Rec', 'Receiving Yards' = 'Rec_Yds', 'Receiving Touchdowns' = 'Rec_Tds'), selected = 'Receiving Yards')
         )
       ),
-<<<<<<< HEAD
-      selectInput(inputId = "Pos", "Position:", 
-                  choices = c('Safety' = c('S', 'FS', 'SS'), 'Cornerback' = 'CB', 'Defensive Back' = 'DB', 'Defensive End' = 'DE', 'Fullback' = 'FB', 'Free Safety' = 'FS', 'Kicker' = 'K', 'Return Specialist' = 'KR', 'Punter' = 'P'),
-=======
       #Changes Statistics of Position Type is Defense and adds Positions and Statistics since all stats are the same for these positions
       conditionalPanel(
         condition = "input.Team == 'Defense'",
         selectInput(inputId = 'P', 'Position:', choices = c('Safety' = 'S', 'Cornerback' = 'CB', 'Defensive End' = 'DE', 'Linebacker' = 'LB', 'Defensive Tackle' = 'NT'), selected = 'Cornerback'),
         selectInput(inputId = 'Statistic', 'Statistic:', choices = c('Tackles' = 'Tkl', 'Defensive Interceptions' = 'Def_Int', 'Sacks' = 'Sk'), selected = 'Tackles')
       ),
-     
->>>>>>> Completed Scatter Plot UI
       hr(),
       helpText('Any notes we need to put about the selections')
     ),
