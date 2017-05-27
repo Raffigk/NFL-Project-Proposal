@@ -9,8 +9,12 @@ shinyUI(fluidPage(
   sidebarLayout(      
     
     sidebarPanel(
+      #Slider for year selector
       sliderInput(inputId = "Year", "Choose the Year(s)",
                   min = 2000, max = 2015, value = c(2000, 2015), sep = ""),
+      #Slider for round selector
+      sliderInput(inputId = "round", "Choose the Round(s)",
+                  min = 1, max = 12,  value = c(1, 12), sep = ""),
       #Select Team Type
       selectInput(inputId = "Team", "Position Type:", 
                   choices = c('Offense' = 'Offense', 'Defense' = 'Defense'), 
