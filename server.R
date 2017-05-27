@@ -1,37 +1,21 @@
 library(shiny)
-
+library(dplyr)
+library(leaflet)
+library(stringr)
 
 # Define server logic for slider examples
 shinyServer(function(input, output) {
- 
   # Show the values using an HTML table
   output$map <- renderLeaflet({
-    library(dplyr)
-    library(shiny)
-    library(leaflet)
-    library(stringr)
-    
-    nfl.data <- read.csv("Data/Final_Draft_Data.csv", stringsAsFactors = FALSE)
-    all.lat.long <- read.csv("Data/UniversitiesLatLong.csv", stringsAsFactors = FALSE) 
-    
-    names(all.lat.long) <- c("Official.Name", "LONGITUDE", "LATITUDE")
-    all.nfl.colleges <- read.csv("Data/NFLUniversities.csv", stringsAsFactors = FALSE)
-    
-    individual.colleges <- left_join(x = all.lat.long, y = all.nfl.colleges, by = "Official.Name") %>% 
-      filter(!is.na(College.Univ)) 
-    
-    nfl.map.data <- nfl.data %>% 
-      select(Player, Year, Rnd, Pos, Official.Name) %>% 
-      filter(Year >= 2005)
-    
-    count.player.per.college <- nfl.data %>% 
-      count(Official.Name)
-    
-    map.college.data <- left_join(x = individual.colleges, y = count.player.per.college, by = "Official.Name") %>% 
-      filter(X.1 != "") # not working atm
-    players.college.data <- left_join(x = almost.college.data, y = nfl.map.data, by = "Official.Name")
-    
-    
+    player.data <- read.csv("Data/map.player.data.csv", stringsAsFactors = FALSE)
+    college.data <- read.csv("Data/map.college.data.csv", stringsAsFactors = FALSE)
+    # Filter Year Range
+    #map.player.data <- player.data %>% Year >= input$Year[1] & Year <= input$Year[2]
+    # Filter Round
+    #map.player.data <- map.player.data[map.player.data$Rnd == input$round,]
+
+    player.data <- player.data %>% filter(Pos == input$Pos)
+    map.college.data <- college.data %>% filter(Official.Name == player.data$Official.Name)
     nfl.map<- map.college.data %>%
       leaflet() %>%
       addTiles() %>%
@@ -46,7 +30,7 @@ shinyServer(function(input, output) {
                               className: 'marker-cluster' + c, iconSize: new 
                               L.Point(40, 40)});}"))),
         
-        label = paste0(strwrap(map.college.data$Official.Name), ": ", strwrap(map.college.data$n), " NFL players drafted") ,
+        label = paste(strwrap(map.college.data$Official.Name),  paste0(strwrap(map.college.data$n), " NFL players drafted"), sep = ": ") ,
         
         lng = (as.numeric(map.college.data$LONGITUDE)), lat = (as.numeric(map.college.data$LATITUDE)), icon = makeIcon(
           iconUrl = map.college.data$X.1,
@@ -54,6 +38,5 @@ shinyServer(function(input, output) {
       addTiles()
     
     nfl.map
-    
   })
 })
