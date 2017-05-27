@@ -18,15 +18,15 @@ shinyUI(fluidPage(
                   min = 1, max = 12,  value = c(1, 12), sep = ""),
       #Select Team Type
       selectInput(inputId = "Team", "Position Type:", 
-                  choices = c('Offense' = 'Offense', 'Defense' = 'Defense'),#, 'Both' = 'Both'),
-                  selected = 'Offense'),
+                  choices = c('Offense' = 'Offense', 'Defense' = 'Defense', 'Both' = 'Both'),
+                  selected = 'Both'),
       #If the team type is both, select all positions
-      # conditionalPanel(
-      #   condition = "input.Team == 'Both'",
-      #   selectInput(inputId = 'Pos', "Position:",
-      #               choices = c('All' = 'All'),
-      #               selected = 'All')
-      # ),
+      conditionalPanel(
+        condition = "input.Team == 'Both'",
+        selectInput(inputId = 'Pos', "Position:",
+                    choices = c('All' = 'All'),
+                    selected = 'All')
+      ),
       #If the Position Type is Offense, select offensive positions
       conditionalPanel(
         condition = "input.Team == 'Offense'", 

@@ -13,9 +13,11 @@ shinyServer(function(input, output) {
     #map.player.data <- player.data %>% Year >= input$Year[1] & Year <= input$Year[2]
     # Filter Round
     #map.player.data <- map.player.data[map.player.data$Rnd == input$round,]
-
-    player.data <- player.data %>% filter(Pos == input$Pos)
-    map.college.data <- college.data %>% filter(Official.Name == player.data$Official.Name)
+    if (input$Pos != 'All'){
+      player.data <- player.data %>% filter(Pos == input$Pos)
+    }
+    map.college.data <- college.data %>% filter(Official.Name %in% player.data$Official.Name)
+    
     nfl.map<- map.college.data %>%
       leaflet() %>%
       addTiles() %>%
