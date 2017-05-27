@@ -13,17 +13,18 @@ individual.colleges <- left_join(x = all.lat.long, y = all.nfl.colleges, by = "O
   filter(!is.na(College.Univ)) 
 
 nfl.map.data <- nfl.data %>% 
-  select(Year, Rnd, Pos, Pos, Official.Name, LONGITUD, LATITUDE) %>% 
+  select(Player, Year, Rnd, Pos, Official.Name) %>% 
   filter(Year >= 2005)
 
 count.player.per.college <- nfl.data %>% 
   count(Official.Name)
 
-final.college.data <- left_join(x = individual.colleges, y = count.player.per.college, by = "Official.Name")
+map.college.data <- left_join(x = individual.colleges, y = count.player.per.college, by = "Official.Name") %>% 
+  filter(!is.na("X.1"))
+players.college.data <- left_join(x = almost.college.data, y = nfl.map.data, by = "Official.Name")
 
 
-
-nfl.map<- final.college.data %>%
+nfl.map<- map.college.data %>%
   leaflet() %>%
   addTiles() %>%
   setView(lng = -114.805089, lat = 35.3327636, zoom = 3) %>%
@@ -35,18 +36,13 @@ nfl.map<- final.college.data %>%
                           return new L.DivIcon({ html: 
                           '<div><span>' + childCount + '</span></div>', 
                           className: 'marker-cluster' + c, iconSize: new 
-                          L.Point(40, 40) });}"))),
+                          L.Point(40, 40)});}"))),
     
-    label = paste0(strwrap(final.college.data$Official.Name), ": ", strwrap(final.college.data$n), " NFL players drafted") ,
+    label = paste0(strwrap(map.college.data$Official.Name), ": ", strwrap(map.college.data$n), " NFL players drafted") ,
     
-    lng = (as.numeric(final.college.data$LONGITUDE)), lat = (as.numeric(final.college.data$LATITUDE)), icon = makeIcon(
-      iconUrl = final.college.data$X.1,
-      iconWidth = 40, iconHeight = 30)) %>% 
+    lng = (as.numeric(map.college.data$LONGITUDE)), lat = (as.numeric(map.college.data$LATITUDE)), icon = makeIcon(
+      iconUrl = map.college.data$X.1,
+      iconWidth = 50, iconHeight = 40)) %>% 
   addTiles()
 
 nfl.map
-library(dplyr)
-library(shiny)
-library(leaflet)
-
-nfl.data 
