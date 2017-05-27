@@ -1,5 +1,6 @@
 library(shiny)
 
+
 # Define server logic for slider examples
 shinyServer(function(input, output) {
  
@@ -52,4 +53,3 @@ shinyServer(function(input, output) {
       addTiles()
   })
 })
-
