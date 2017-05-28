@@ -52,7 +52,7 @@ tabsetPanel(
     )
     ),
 
-    tabPanel(
+    tabPanel("Conclusion",
       
       mainPanel(
         verbatimTextOutput("conclusion"))
