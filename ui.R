@@ -4,9 +4,41 @@
 library(shiny)
 library(leaflet)
 library(shinythemes)
+library(dplyr)
 
 shinyUI(fluidPage(theme = shinytheme("superhero"), 
-tabsetPanel(
+                  # A map comparing location with round/position/year
+                  tabsetPanel(
+                    
+                    tabPanel("Intro Page",
+                             titlePanel("NFL statistics"),
+                             h4("Michelle Ho, Raffi Gharakhanian, Jon Cantle, Josh Dugger"),
+                             h3("The Data"),
+                             p("We discovered a data set containing information on NFL
+                               players drafted from the years 1985 to 2015, ",
+                               a("here(ERROR)", href = "https://www.kaggle.com/ronaldjgrafjr/nfl-draft-outcome"),
+                               ". This dataset was originally created by Ron Graf, who collected the data from ",
+                               a("pro football reference", href = "http://www.pro-football-reference.com/"),
+                               ", a NFL players statistics website."), 
+                             p("In addition to that data set, we will also be using a data set that gives
+                               us information about the location of all colleges in the United States, found ",
+                               a("here", href ="https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx"),
+                               "(the data set titled
+                               “Directory Information(cant find this, need better directions”). "),
+                             h3("Inspirations to look deeper"),
+                             p("With the NFL being such a popular sport. There were plenty of unanswered 
+                               questions that could be answered through out data sets."),
+                             p("Some questions we thought could be answered and provide interesting results were:"),
+                             p("- Which colleges produce the best NFL players (based on which round they were picked)
+                               for each position?"),
+                             p("- Is there a relationship between the college location and strength of position for
+                               a particular player?"),
+                             p("- What different characteristics (college, location, round picked in, year picked)
+                               affect the statistics the player has throughout their career?"),
+                             mainPanel(
+                               verbatimTextOutput("intro page")
+                             )
+                             ),
                   tabPanel("Map",
   
   titlePanel(h1("Where Do Draft Picks Come From?", align = 'center')),
@@ -51,7 +83,7 @@ tabsetPanel(
       )
     )
     ),
-
+    # Conclusion panel, where seen results are noted.
     tabPanel("Conclusion",
       
       mainPanel(
