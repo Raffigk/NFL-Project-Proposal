@@ -3,12 +3,15 @@
 # Michelle Ho, Raffi Gharakhanian, Jon Cantle, Josh Dugger
 library(shiny)
 library(leaflet)
+library(shinythemes)
 
-shinyUI(fluidPage(    
+shinyUI(fluidPage(theme = shinytheme("superhero"), 
+tabsetPanel(
+                  tabPanel("Map",
   
   titlePanel(h1("Where Do Draft Picks Come From?", align = 'center')),
   
-  sidebarLayout(      
+  sidebarLayout(
     
     sidebarPanel(
       #Slider for year selector
@@ -44,13 +47,18 @@ shinyUI(fluidPage(
       )
     ),
     mainPanel(
-      tabsetPanel(
-      tabPanel("Map", leafletOutput("map")),
-      tabPanel("Summary", verbatimTextOutput("summary")),
-      tabPanel("Conclusion(rename)", verbatimTextOutput("conclusion")))
+      leafletOutput("map")
       )
     )
+    ),
+
+    tabPanel(
+      
+      mainPanel(
+        verbatimTextOutput("conclusion"))
+    )
   )
+)
 )
 
 #conditionalPanel(
