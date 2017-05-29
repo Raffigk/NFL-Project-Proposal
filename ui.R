@@ -35,7 +35,8 @@ shinyUI(fluidPage(theme = shinytheme("superhero"),
                                  for each position?"),
                                p("- Is there a relationship between the college location and strength of position for
                                  a particular player?"),
-                               p("- What different characteristics (college, location, round picked in, year picked)
+                               p("- What different characteristics (college, location, round picked in, year picked"),
+                               p("- How the year the player was picked, and the years they played in,
                                  affect the statistics the player has throughout their career?"),
                              h3("Displaying our Findings/ Our Data Visualizations:"),
                              h4("Map of colleges"),

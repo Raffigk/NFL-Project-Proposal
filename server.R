@@ -27,6 +27,19 @@ shinyServer(function(input, output) {
     tester.data <- player.data %>% filter(Official.Name == map.college.data$Official.Name)
     tester.num <- nrow(tester.data)
     
+    if (input$round[1] == input$round[2]) {
+      round.string <- paste0(" in round ", input$round[1])
+    } else {
+      round.string <- paste0(" between rounds ", input$round[1], " and ", input$round[2])
+    }
+    
+    if (input$Year[1] == input$Year[2]) {
+      year.string <- paste0(" In the year ", input$Year[1], ", ")
+    } else {
+      year.string <- paste0("Between the years ", input$Year[1], " and ", input$Year[2], ", ")
+    }
+    
+    
     nfl.map<- map.college.data %>%
       leaflet() %>%
       addTiles() %>%
@@ -42,7 +55,9 @@ shinyServer(function(input, output) {
                               className: 'marker-cluster' + c, iconSize: new 
                               L.Point(40, 40)});}"))),
         
-        label = paste(strwrap(map.college.data$Official.Name),  paste0(tester.num ," ", strwrap(input$Pos), "'s drafted"), sep = ": ") ,
+        label = paste(strwrap(map.college.data$Official.Name), paste0(year.string, tester.num ," ", input$Pos,
+                                                                      "'s drafted", round.string), sep = ": ") ,
+        
         
         lng = (as.numeric(map.college.data$LONGITUDE)), lat = (as.numeric(map.college.data$LATITUDE)), icon = makeIcon(
           iconUrl = map.college.data$X.1,
