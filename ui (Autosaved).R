@@ -1,4 +1,4 @@
-
+ 
 # INFO 201 Group Final Project
 # Michelle Ho, Raffi Gharakhanian, Jon Cantle, Josh Dugger
 library(shiny)
@@ -15,37 +15,35 @@ shinyUI(fluidPage(theme = shinytheme("united"),
                              titlePanel("NFL statistics"),
                              h4("Michelle Ho, Raffi Gharakhanian, Jon Cantle, Josh Dugger"),
                              h3("The Data"),
-                               p("We discovered a data set containing information on NFL
-                                 players drafted from the years 1985 to 2015, ",
-                                 a("here(ERROR)", href = "https://www.kaggle.com/ronaldjgrafjr/nfl-draft-outcome"),
-                                 ". This dataset was originally created by Ron Graf, who collected the data from ",
-                                 a("Pro Football Reference", href = "http://www.pro-football-reference.com/"),
-                                 ", a NFL players statistics website."), 
-                               p("In addition to that data set, we will also be using a data set that gives
-                                 us information about the location of all colleges in the United States, found ",
-                                 a("here", href ="https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx"),
-                                 "(the data set titled
-                                 “Directory Information(cant find this, need better directions”). We will be using
-                                 this data set to map each college that players in the NFL played at."),
+                             p("We discovered a data set containing information on NFL
+                               players drafted from the years 1985 to 2015, ",
+                               a("here(ERROR)", href = "https://www.kaggle.com/ronaldjgrafjr/nfl-draft-outcome"),
+                               ". This dataset was originally created by Ron Graf, who collected the data from ",
+                               a("pro football reference", href = "http://www.pro-football-reference.com/"),
+                               ", a NFL players statistics website."), 
+                             p("In addition to that data set, we will also be using a data set that gives
+                               us information about the location of all colleges in the United States, found ",
+                               a("here", href ="https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx"),
+                               "(the data set titled
+                               “Directory Information(cant find this, need better directions”). "),
                              h3("Inspirations to look deeper"),
-                               p("With the NFL being such a popular sport, there were plenty of unanswered 
-                                 questions that we found could be answered through our data sets."),
-                               p("Some questions we believe could be answered and could provide valuable results include:"),
-                               p("- Which colleges produce the best NFL players (based on which round they were picked)
-                                 for each position?"),
-                               p("- Is there a relationship between the college location and strength of position for
-                                 a particular player?"),
-                               p("- What different characteristics (college, location, round picked in, year picked)
-                                 affect the statistics the player has throughout their career?"),
-                             h3("Displaying our Findings/ Our Data Visualizations:"),
+                             p("With the NFL being such a popular sport. There were plenty of unanswered 
+                               questions that could be answered through out data sets."),
+                             p("Some questions we thought could be answered and provide interesting results were:"),
+                             p("- Which colleges produce the best NFL players (based on which round they were picked)
+                               for each position?"),
+                             p("- Is there a relationship between the college location and strength of position for
+                               a particular player?"),
+                             p("- What different characteristics (college, location, round picked in, year picked)
+                               affect the statistics the player has throughout their career?"),
+                             h3("What we did"),
                              h4("Map of colleges"),
-                               p("We created a map of all the colleges in the United States that had players drafted from
-                                 in the years 2000 - 2015. Our aim was to see visible differences in which colleges showed up 
-                                when we filtered our data by different factors. These factors included the range of rounds 
-                                 picked, the range of years picked, and the position players were getting drafted for."),
-                               p("We were expecting results that could indicate to us which colleges were stronger 
-                                   when it came to supplying players to the NFL, and how the position and the year could change 
-                                 which colleges were stronger (paragraph needs to be worded better) "),
+                             p("We created a map of all the colleges in the United States that had players drafted from
+                               the years 2000 - 2015. Our aim was to see visable different of what college showed up 
+                              when we change: The range of rounds picked, The range of years picked, The player position"),
+                             p("We were expecting results that could indicate to us which colleges were stronger 
+                                 when it came to supplying players to the NFL and how position and year could change 
+                               which colleges were stronger (paragraph needs to be worded better) "),
                              h4("Scatter plot of player statistics"),
                              p("We had an idea that over the years, the NFL has changed drastically. These changes have resulted
                                in the game being played differently, resulting in priorities changing, and ultimitely statistics."),
