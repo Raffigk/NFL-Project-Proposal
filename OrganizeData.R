@@ -6,7 +6,6 @@ full.draft.data <- read.csv('data/Final_Draft_Data.csv', stringsAsFactors = FALS
 #Data for this chart
 draft.data <- full.draft.data %>% 
   select(Year, Rnd, Pick, Player, Pos, Cmp, Pass_Att, Pass_Yds, Pass_Int, Rush_Att, Rush_Yds, Rush_TDs, Rec, Rec_Yds, Rec_Tds, Tkl, Def_Int, Sk, Official.Name)
-TeamTe
 defense.team <- c('DT', 'DE', 'DB', 'MLB', 'OLB', 'CB', 'S', 'FS', 'ILB', 'DL', 'SS', 'LB')
 offense.team <- c('C', 'G', 'T', 'QB', 'RB', 'WR', 'TE', 'OL', 'NT', 'FB')
 special.team <- c('K', 'H', 'LS', 'P', 'KOS', 'KR', 'PR')
@@ -49,10 +48,10 @@ draft.data <- draft.data %>%
 
 all.years <- unique(draft.data$Year)
 
-player.data <- data.frame(matrix(unlist(draft.data), nrow = 8427), stringsAsFactors = FALSE)
+#player.data <- data.frame(matrix(unlist(draft.data), nrow = 8427), stringsAsFactors = FALSE)
 
 
-write.csv(draft.data, file = "data/player.data.csv", row.names = FALSE)
+#write.csv(draft.data, file = "data/player.data.csv", row.names = FALSE)
 
 
 
