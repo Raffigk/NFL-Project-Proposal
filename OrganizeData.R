@@ -5,7 +5,7 @@ library(dplyr)
 full.draft.data <- read.csv('data/Final_Draft_Data.csv', stringsAsFactors = FALSE)
 #Data for this chart
 draft.data <- full.draft.data %>% 
-  select(Year, Rnd, Pick, Player, Pos, Cmp, Pass_Att, Pass_Yds, Pass_Int, Rush_Att, Rush_Yds, Rush_TDs, Rec, Rec_Yds, Rec_Tds, Tkl, Def_Int, Sk, Official.Name)
+  select(Year, Rnd, Pick, Player, Pos, Cmp, Pass_Att, Pass_Yds, Pass_Int, Rush_Att, Rush_Yds, Rush_TDs, Rec, Rec_Yds, Rec_Tds, Tkl, Def_Int, Sk, Official.Name, To, Age)
 defense.team <- c('DT', 'DE', 'DB', 'MLB', 'OLB', 'CB', 'S', 'FS', 'ILB', 'DL', 'SS', 'LB')
 offense.team <- c('C', 'G', 'T', 'QB', 'RB', 'WR', 'TE', 'OL', 'NT', 'FB')
 special.team <- c('K', 'H', 'LS', 'P', 'KOS', 'KR', 'PR')
@@ -46,12 +46,27 @@ Agg_Position <- function(pos) {
 draft.data <- draft.data %>%
   mutate(GenPos = (lapply(draft.data$Pos, Agg_Position)))
 
-all.years <- unique(draft.data$Year)
+#Adds 2016 as year to for players who have only played one year
+draft.data <- draft.data %>%
+  mutate(To = ifelse(is.na(To),2016,To))
 
-#player.data <- data.frame(matrix(unlist(draft.data), nrow = 8427), stringsAsFactors = FALSE)
+#Testing
+StatAverageByYear <- function(year) {
+  cumulative.stat.data <- draft.data %>% filter(GenPos == 'QB' & Year == year)
+  stat.data <- cumulative.stat.data %>% select(Rush_TDs, Year, To)
+  plot.data <-  stat.data %>% filter(!is.na(Rush_TDs))
+  seasons.played <- mean(plot.data$To - plot.data$Year)
+  stat.ave <- mean(plot.data[[1]])
+  stat.ave <- round(stat.ave, digits = 2)
+  ave.stat <- stat.ave / seasons.played
+  data.plot <- data.frame(Year = year, Stat = ave.stat)
+  return(data.plot)
+}
+year <- unique(draft.data$Year)
+plot.data <- lapply(year, StatAverageByYear) %>% bind_rows()
+plot.data <- unique(plot.data)
 
-
-#write.csv(draft.data, file = "data/player.data.csv", row.names = FALSE)
-
+plot_ly(plot.data, x = ~Year, y = ~Stat, name = "Statistics Plot", type='scatter') %>% 
+  add_trace(mode = "markers")
 
 
