@@ -6,6 +6,7 @@ full.draft.data <- read.csv('data/Final_Draft_Data.csv', stringsAsFactors = FALS
 #Data for this chart
 draft.data <- full.draft.data %>% 
   select(Year, Rnd, Pick, Player, Pos, Cmp, Pass_Att, Pass_Yds, Pass_Int, Rush_Att, Rush_Yds, Rush_TDs, Rec, Rec_Yds, Rec_Tds, Tkl, Def_Int, Sk, Official.Name, To, Age)
+
 defense.team <- c('DT', 'DE', 'DB', 'MLB', 'OLB', 'CB', 'S', 'FS', 'ILB', 'DL', 'SS', 'LB')
 offense.team <- c('C', 'G', 'T', 'QB', 'RB', 'WR', 'TE', 'OL', 'NT', 'FB')
 special.team <- c('K', 'H', 'LS', 'P', 'KOS', 'KR', 'PR')
@@ -53,8 +54,8 @@ draft.data <- draft.data %>%
 #Testing
 StatAverageByYear <- function(year) {
   cumulative.stat.data <- draft.data %>% filter(GenPos == 'QB' & Year == year)
-  stat.data <- cumulative.stat.data %>% select(Rush_TDs, Year, To)
-  plot.data <-  stat.data %>% filter(!is.na(Rush_TDs))
+  stat.data <- cumulative.stat.data %>% select(Rush_Yds, Year, To)
+  plot.data <-  stat.data %>% filter(!is.na(Rush_Yds))
   seasons.played <- mean(plot.data$To - plot.data$Year)
   stat.ave <- mean(plot.data[[1]])
   stat.ave <- round(stat.ave, digits = 2)
@@ -66,7 +67,5 @@ year <- unique(draft.data$Year)
 plot.data <- lapply(year, StatAverageByYear) %>% bind_rows()
 plot.data <- unique(plot.data)
 
-plot_ly(plot.data, x = ~Year, y = ~Stat, name = "Statistics Plot", type='scatter') %>% 
-  add_trace(mode = "markers")
-
+plot_ly(plot.data, x = ~Year, y = ~Stat, name = "Statistics Plot", type='scatter') 
 

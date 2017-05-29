@@ -1,4 +1,6 @@
 library(shiny)
+library(plotly)
+library(dplyr)
 
 shinyUI(fluidPage(    
   
