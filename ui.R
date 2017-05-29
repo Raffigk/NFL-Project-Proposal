@@ -6,7 +6,7 @@ library(leaflet)
 library(shinythemes)
 library(dplyr)
 
-shinyUI(fluidPage(theme = shinytheme("united"), 
+shinyUI(fluidPage(theme = shinytheme("superhero"), 
                   
                   tabsetPanel(
                     
@@ -68,7 +68,7 @@ shinyUI(fluidPage(theme = shinytheme("united"),
     sidebarPanel(
       #Slider for year selector
       sliderInput(inputId = "Year", "Choose the Year(s)",
-                  min = 2000, max = 2015, value = c(2000, 2015), sep = ""),
+                  min = 1985, max = 2015, value = c(1985, 2015), sep = ""),
       #Slider for round selector
       sliderInput(inputId = "round", "Choose the Round(s)",
                   min = 1, max = 12,  value = c(1, 12), sep = ""),
@@ -96,7 +96,9 @@ shinyUI(fluidPage(theme = shinytheme("united"),
         selectInput(inputId = 'P', 'Position:', 
                     choices = c('Safety' = 'S', 'Cornerback' = 'CB', 'Defensive End' = 'DE', 'Linebacker' = 'LB', 'Defensive Tackle' = 'NT'), 
                     selected = 'Cornerback')
-      )
+      ),
+      hr(),
+      helpText("Data for years 1993/2003 missing from dataset")
     ),
     mainPanel(
       leafletOutput("map")

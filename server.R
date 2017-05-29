@@ -32,7 +32,8 @@ shinyServer(function(input, output) {
       addTiles() %>%
       setView(lng = -114.805089, lat = 35.3327636, zoom = 3) %>%
       addMarkers(clusterOptions = markerClusterOptions(iconCreateFunction=JS(
-        iconCreateFunction=JS("function (cluster) {    
+        iconCreateFunction=JS("function (cluster) {
+                              
                               var childCount = cluster.getChildCount(); 
                               var c = ' marker-cluster-';  
                               c += 'small';  
