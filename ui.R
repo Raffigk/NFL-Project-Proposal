@@ -67,6 +67,8 @@ shinyUI(fluidPage(theme = shinytheme("superhero"),
   sidebarLayout(
     
     sidebarPanel(
+      #User input a player name 
+      textInput("player", label = h4("Choose a specific player"), value = "", width = NULL, placeholder = NULL),
       #Slider for year selector
       sliderInput(inputId = "Year", "Choose the Year(s)",
                   min = 1985, max = 2015, value = c(1985, 2015), sep = ""),

@@ -17,15 +17,23 @@ shinyServer(function(input, output) {
     # Filter Round
     player.data <- player.data %>% filter(player.data$Rnd >= input$round[1] & player.data$Rnd <= input$round[2])
     
+    #filters out the player that the user enters.
+    if (input$player != "") {
+      player.data <- player.data %>% filter(player.data$Player == input$player)
+    }
+    
      if (input$Team != 'Both'){
       player.data <- player.data %>% filter(Team == input$Team)
      # player.data <- player.data %>% filter(Pos == input$Pos)
      }
+    
     #player.data <- player.data %>% filter(Pos == "RB")
     map.college.data <- college.data %>% filter(Official.Name %in% player.data$Official.Name)
     
     tester.data <- player.data %>% filter(Official.Name == map.college.data$Official.Name)
     tester.num <- nrow(tester.data)
+    
+    
     
     if (input$round[1] == input$round[2]) {
       round.string <- paste0(" in round ", input$round[1])
