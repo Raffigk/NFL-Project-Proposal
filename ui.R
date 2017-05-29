@@ -6,10 +6,11 @@ library(leaflet)
 library(shinythemes)
 library(dplyr)
 
-shinyUI(fluidPage(theme = shinytheme("superhero"), 
-                  # A map comparing location with round/position/year
+shinyUI(fluidPage(theme = shinytheme("united"), 
+                  
                   tabsetPanel(
                     
+                    # gives a summary of our data collection and what we will be presenting.
                     tabPanel("Intro Page",
                              titlePanel("NFL statistics"),
                              h4("Michelle Ho, Raffi Gharakhanian, Jon Cantle, Josh Dugger"),
@@ -35,11 +36,28 @@ shinyUI(fluidPage(theme = shinytheme("superhero"),
                                a particular player?"),
                              p("- What different characteristics (college, location, round picked in, year picked)
                                affect the statistics the player has throughout their career?"),
+                             h3("What we did"),
+                             h4("Map of colleges"),
+                             p("We created a map of all the colleges in the United States that had players drafted from
+                               the years 2000 - 2015. Our aim was to see visable different of what college showed up 
+                              when we change: The range of rounds picked, The range of years picked, The player position"),
+                             p("We were expecting results that could indicate to us which colleges were stronger 
+                                 when it came to supplying players to the NFL and how position and year could change 
+                               which colleges were stronger (paragraph needs to be worded better) "),
+                             h4("Scatter plot of player statistics"),
+                             p("We had an idea that over the years, the NFL has changed drastically. These changes have resulted
+                               in the game being played differently, resulting in priorities changing, and ultimitely statistics."),
+                             p("We created a scatter plot that would plot the statistics change over the years of the NFL, with
+                               options to choose between position and type of statistic."),
+                             p("We are expecting to see trends either  moving upwards or downwards in a few different statistic groups,
+                               as time moves forward, and we believe we could make sense of some of these statistic changes."),
                              mainPanel(
                                verbatimTextOutput("intro page")
                              )
                              ),
-                  tabPanel("Map",
+                 
+                    # A map comparing location with round/position/year
+                     tabPanel("Map",
   
   titlePanel(h1("Where Do Draft Picks Come From?", align = 'center')),
   

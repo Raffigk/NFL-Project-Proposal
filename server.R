@@ -8,7 +8,10 @@ library(stringr)
 shinyServer(function(input, output) {
   # Show the values using an HTML table
   output$map <- renderLeaflet({
-    player.data <- read.csv("Data/map.player.data.csv", stringsAsFactors = FALSE)
+    # data for all players
+    player.data <- draft.data
+    
+    # data for each individual college
     college.data <- read.csv("Data/map.college.data.csv", stringsAsFactors = FALSE)
     # Filter Year Range
     #map.player.data <- player.data %>% Year >= input$Year[1] & Year <= input$Year[2]
