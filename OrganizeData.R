@@ -54,8 +54,8 @@ draft.data <- draft.data %>%
 #Testing
 StatAverageByYear <- function(year) {
   cumulative.stat.data <- draft.data %>% filter(GenPos == 'QB' & Year == year)
-  stat.data <- cumulative.stat.data %>% select(Rush_Yds, Year, To)
-  plot.data <-  stat.data %>% filter(!is.na(Rush_Yds))
+  stat.data <- cumulative.stat.data %>% select(Cmp, Year, To)
+  plot.data <-  stat.data %>% filter(!is.na(Cmp))
   seasons.played <- mean(plot.data$To - plot.data$Year)
   stat.ave <- mean(plot.data[[1]])
   stat.ave <- round(stat.ave, digits = 2)
