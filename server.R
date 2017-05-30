@@ -20,7 +20,8 @@ shinyServer(function(input, output) {
     #filters out the player that the user enters.
     if (input$player != "") {
       player.data <- player.data %>% filter(player.data$Player == input$player)
-    }
+    }# error 2 cases: peyton manning(idk why not working), ike taylor(guy with no university)
+    
     
      if (input$Team != 'Both'){
       player.data <- player.data %>% filter(Team == input$Team)
@@ -30,8 +31,6 @@ shinyServer(function(input, output) {
     #player.data <- player.data %>% filter(Pos == "RB")
     map.college.data <- college.data %>% filter(Official.Name %in% player.data$Official.Name)
     
-    tester.data <- player.data %>% filter(Official.Name == map.college.data$Official.Name)
-    tester.num <- nrow(tester.data)
     
     
     
@@ -47,6 +46,10 @@ shinyServer(function(input, output) {
       year.string <- paste0("Between the years ", input$Year[1], " and ", input$Year[2], ", ")
     }
     
+    tester.data <- player.data %>% filter(Official.Name == map.college.data$Official.Name)
+    tester.num <- nrow(tester.data) # wrong
+    college.stats <-  paste0(year.string, tester.num ," ", input$Pos,
+                             "'s drafted", round.string)
     
     nfl.map<- map.college.data %>%
       leaflet() %>%
@@ -63,8 +66,7 @@ shinyServer(function(input, output) {
                               className: 'marker-cluster' + c, iconSize: new 
                               L.Point(40, 40)});}"))),
         
-        label = paste(strwrap(map.college.data$Official.Name), paste0(year.string, tester.num ," ", input$Pos,
-                                                                      "'s drafted", round.string), sep = ": ") ,
+        label = paste0(strwrap(map.college.data$Official.Name),": ", college.stats),
         
         
         lng = (as.numeric(map.college.data$LONGITUDE)), lat = (as.numeric(map.college.data$LATITUDE)), icon = makeIcon(
