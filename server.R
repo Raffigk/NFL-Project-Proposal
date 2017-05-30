@@ -57,6 +57,9 @@ shinyServer(function(input, output) {
                               player.data$Rnd, " (", player.data$Pick, " overall)")
     }
     
+    labs = paste0(map.college.data$Official.Name, '<br />', 
+                   college.stats)
+    
     nfl.map<- map.college.data %>%
       leaflet() %>%
       addTiles() %>%
@@ -72,7 +75,9 @@ shinyServer(function(input, output) {
                               className: 'marker-cluster' + c, iconSize: new 
                               L.Point(40, 40)});}"))),
         
-       label = paste0(strwrap(map.college.data$Official.Name),": ", college.stats),
+        label = lapply(labs, HTML),
+        
+       #label = paste0(strwrap(map.college.data$Official.Name),": ", college.stats),
        #label = htmltools::HTML(paste0(map.college.data$Official.Name,":<br/>", college.stats)), 
        #This is my attempt to make multiple lines^, grrr why doesnt it work, doesnt look at map.coll.ege.data$Official.Name like the map normally does.
         labelOptions = labelOptions(direction = 'top', style = list()),
@@ -86,3 +91,4 @@ shinyServer(function(input, output) {
     nfl.map
 })
   })
+

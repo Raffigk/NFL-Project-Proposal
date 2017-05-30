@@ -19,8 +19,8 @@ shinyUI(fluidPage(theme = shinytheme("superhero"),
                                  players drafted from the years 1985 to 2015, ",
                                  a("here(ERROR)", href = "https://www.kaggle.com/ronaldjgrafjr/nfl-draft-outcome"),
                                  ". This dataset was originally created by Ron Graf, who collected the data from ",
-                                 a("Pro Football Reference", href = "http://www.pro-football-reference.com/"),
-                                 ", a NFL players statistics website."), 
+                                 a("Pro Football Reference,", href = "http://www.pro-football-reference.com/"),
+                                 " a NFL players statistics website."), 
                                p("In addition to that data set, we will also be using a data set that gives
                                  us information about the location of all colleges in the United States, found ",
                                  a("here", href ="https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx"),
@@ -71,7 +71,7 @@ shinyUI(fluidPage(theme = shinytheme("superhero"),
       textInput("player", label = h5("Player select"), value = "", width = NULL,
                 placeholder = "Choose a player"),
       helpText("For example : Aaron Rodgers"),
-      submitButton(text = "Enter"), # this is applied to all the widgets, I only want it for the textInput^, FIX!
+      # submitButton(text = "Enter"), # this is applied to all the widgets, I only want it for the textInput^, FIX!
   
    
       #Slider for year selector
