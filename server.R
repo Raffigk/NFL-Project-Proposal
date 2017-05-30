@@ -27,7 +27,7 @@ shinyServer(function(input, output) {
         if (input$Pos != 'All'){
           player.data <- player.data %>% filter(Pos == input$Pos)
         }
-      }   
+      }
     }
     
     # Filters colleges to be ploted to only the colleges with draft picks meeting the criteria above
@@ -48,22 +48,24 @@ shinyServer(function(input, output) {
     }
     
     #### Josh needs to be explained what is going on here ####
-    tester.data <- player.data %>% filter(Official.Name == map.college.data$Official.Name)
-    tester.num <- nrow(tester.data) # wrong
+    number.per.uni <- player.data %>% count(Official.Name)
+    map.college.data <- left_join(map.college.data, number.per.uni, by = "Official.Name")
+    View(map.college.data)
     
     # Stats for the college label, how many picks during the year and what position.
     if (input$player == "" && input$Pos != "All") {
-      college.stats <-  paste0(year.string, tester.num ," ", input$Pos,
+      college.stats <-  paste0(year.string,"<br />", map.college.data$n.x ," ", input$Pos,
                              "'s were drafted", round.string)
     } else if (input$player == "" && input$Pos == "All"){  # If position is All, change to "players"
-      college.stats <- paste0(year.string, tester.num , " players's were drafted", round.string)
+      college.stats <- paste0(year.string, "<br />", map.college.data$n.y, " players were drafted", round.string)
     } else{ # If single player is searched for
-      college.stats <- paste0("In ", player.data$Year, ", ", player.data$Player, " was drafted by ", player.data$Tm, ". He was picked in round ",
+      college.stats <- paste0("In ", player.data$Year, ", ", player.data$Player, " was drafted by ", player.data$Tm, ".<br /> He was picked in round ",
                               player.data$Rnd, " (", player.data$Pick, " overall)")
     }
     # Apply line break to labels
     labs = paste0(map.college.data$Official.Name, '<br />', 
                    college.stats)
+    
     # render map
     nfl.map<- map.college.data %>%
       leaflet() %>%
@@ -71,7 +73,6 @@ shinyServer(function(input, output) {
       setView(lng = -114.805089, lat = 35.3327636, zoom = 3) %>%
       addMarkers(clusterOptions = markerClusterOptions(iconCreateFunction=JS(
         iconCreateFunction=JS("function (cluster) {
-                              
                               var childCount = cluster.getChildCount(); 
                               var c = ' marker-cluster-';  
                               c += 'small';  
