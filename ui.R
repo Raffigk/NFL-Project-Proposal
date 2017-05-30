@@ -68,10 +68,12 @@ shinyUI(fluidPage(theme = shinytheme("superhero"),
     
     sidebarPanel(
       #User input a player name 
-      textInput("player", label = h5("Player select"), value = "", width = NULL, placeholder = "Choose a player"),
+      textInput("player", label = h5("Player select"), value = "", width = NULL,
+                placeholder = "Choose a player"),
       helpText("For example : Aaron Rodgers"),
-      submitButton(text = "Enter"),
-      
+      submitButton(text = "Enter"), # this is applied to all the widgets, I only want it for the textInput^, FIX!
+  
+   
       #Slider for year selector
       sliderInput(inputId = "Year", "Choose the Year(s)",
                   min = 1985, max = 2015, value = c(1985, 2015), sep = ""),
@@ -82,6 +84,7 @@ shinyUI(fluidPage(theme = shinytheme("superhero"),
       selectInput(inputId = "Team", "Position Type:", 
                   choices = c('Offense' = 'Offense', 'Defense' = 'Defense', 'Both' = 'Both'),
                   selected = 'Both'),
+      
       #If the team type is both, select all positions
       conditionalPanel(
         condition = "input.Team == 'Both'",

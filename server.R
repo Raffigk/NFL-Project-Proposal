@@ -8,7 +8,7 @@ shinyServer(function(input, output) {
   # Show the values using an HTML table
   output$map <- renderLeaflet({
     # data for all players
-    player.data <- draft.data 
+    player.data <- draft.data  #From OrganizeData, need to write a csv for this.
     
     # data for each individual college
     college.data <- read.csv("Data/map.college.data.csv", stringsAsFactors = FALSE) 
@@ -48,8 +48,14 @@ shinyServer(function(input, output) {
     
     tester.data <- player.data %>% filter(Official.Name == map.college.data$Official.Name)
     tester.num <- nrow(tester.data) # wrong
+    
+    if (input$player == "") {
     college.stats <-  paste0(year.string, tester.num ," ", input$Pos,
                              "'s drafted", round.string)
+    } else {
+      college.stats <- paste0("In ", player.data$Year, ", ", input$player, " was drafted by ", player.data$Tm, ". He was picked in round ",
+                              player.data$Rnd, " (", player.data$Pick, " overall)")
+    }
     
     nfl.map<- map.college.data %>%
       leaflet() %>%
@@ -66,7 +72,10 @@ shinyServer(function(input, output) {
                               className: 'marker-cluster' + c, iconSize: new 
                               L.Point(40, 40)});}"))),
         
-        label = paste0(strwrap(map.college.data$Official.Name),": ", college.stats),
+       label = paste0(strwrap(map.college.data$Official.Name),": ", college.stats),
+       #label = htmltools::HTML(paste0(map.college.data$Official.Name,":<br/>", college.stats)), 
+       #This is my attempt to make multiple lines^, grrr why doesnt it work, doesnt look at map.coll.ege.data$Official.Name like the map normally does.
+        labelOptions = labelOptions(direction = 'top', style = list()),
         
         
         lng = (as.numeric(map.college.data$LONGITUDE)), lat = (as.numeric(map.college.data$LATITUDE)), icon = makeIcon(
