@@ -30,6 +30,7 @@ shinyServer(function(input, output) {
       }
     }
     
+    
     # Filters colleges to be ploted to only the colleges with draft picks meeting the criteria above
     map.college.data <- college.data %>% filter(Official.Name %in% player.data$Official.Name)
     

@@ -122,7 +122,9 @@ shinyUI(
              sidebarLayout(
                sidebarPanel(
                  selectInput(inputId = 'GenPos', 'Position:', 
-                             choices = c('Quarterback (O)' = 'QB', 'Running Back (O)' = 'RB', 'Tight End (O)' = 'TE', 'Wide Receiver (O)' = 'WR', 'Fullback (O)' = 'FB', 'Cornerback (D)' = 'CB', 'Defensive End (D)' = 'DE', 'Linebacker (D)' = 'LB', 'Defensive Tackle (D)' = 'NT'), 
+                             choices = c('Quarterback (O)' = 'QB', 'Running Back (O)' = 'RB', 'Tight End (O)' = 'TE', 
+                                         'Wide Receiver (O)' = 'WR', 'Fullback (O)' = 'FB', 'Cornerback (D)' = 'CB', 
+                                         'Defensive End (D)' = 'DE', 'Linebacker (D)' = 'LB', 'Defensive Tackle (D)' = 'NT'), 
                              selected = 'Quarterback'),
                  uiOutput('selectedStats'),
                  hr(),
@@ -139,6 +141,24 @@ shinyUI(
     
     # Conclusion panel, where seen results are noted.
     tabPanel("Conclusion",
+             titlePanel("Our Findings"),
+             hr(),
+             
+             h3('Important Descriptive Information'),
+             
+             h3('Major Trends'),
+             p('We were able to discover that the way NFL players play have noticeably changed since 1985. For example, 
+               from our scatter plot, on average, all quarterback passing statistics have gone up, while all running 
+               back statistics have gone down. This reflects and proves the theory that passing has become more prevalent 
+               in the game overtime. Thus, in answering our initial question, “Does the year the player was picked affect 
+               the statistics the player has throughout their career?”, we are able to acknowledge that there is a relationship 
+               between the year and player statistics.'),
+             
+             h3('Notable Outliers'),
+             p('One notable outlier we noticed was that since 2010, the average amount of yards rushed by quarterbacks 
+               has risen substantially. There are significant outliers that are present in our scatterplot from years 
+               2010-2015, which shows that a large shift since 1985.'),
+             
       mainPanel(
         verbatimTextOutput("conclusion"))
       )
