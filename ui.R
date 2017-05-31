@@ -7,6 +7,8 @@ library(shinythemes)
 library(dplyr)
 library(plotly)
 
+source('./OrganizeData.R')
+
 shinyUI(
   fluidPage(
     theme = shinytheme("united"),

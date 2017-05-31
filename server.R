@@ -21,8 +21,6 @@ shinyServer(function(input, output) {
       # Filter Round
       player.data <- player.data %>% filter(Rnd >= input$round[1] & Rnd <= input$round[2])
       
-      
-      
       ### Attempt to filter by team and pos inputs ---- Only filters with team, does not work with Position ####
       if (input$Team != 'Both'){
         player.data <- player.data %>% filter(Team == input$Team)
@@ -31,16 +29,6 @@ shinyServer(function(input, output) {
         }
       }
     }
-    
-    ouput$selectedPosition <- renderUI({
-      if (input$Team = "Offense") {
-        selectedInput(inputID = 'Pos', "Position:",
-                      choices = c('All' = 'All', 'Quarterback' = 'QB', 'Running Back' = 'RB', 'Tight End' = 'TE', 'Wide Receiver' = 'WR', 'Fullback' = 'FB'), selected = "All")
-      } else if (input$Team == "Defense") {
-        selectInput(inputId = 'Pos', 'Position:', 
-                    choices = c('All' = 'All', 'Safety' = 'S', 'Cornerback' = 'CB', 'Defensive End' = 'DE', 'Linebacker' = 'LB', 'Defensive Tackle' = 'NT'), selected = "All")
-      }
-    })
     
     # Filters colleges to be ploted to only the colleges with draft picks meeting the criteria above
     map.college.data <- college.data %>% filter(Official.Name %in% player.data$Official.Name)
@@ -61,11 +49,11 @@ shinyServer(function(input, output) {
     
     number.per.uni <- player.data %>% count(Official.Name)
     map.college.data <- left_join(map.college.data, number.per.uni, by = "Official.Name")
-
+    
     # Stats for the college label, how many picks during the year and what position.
     if (input$player == "" && input$Pos != "All") {
       college.stats <-  paste0(year.string,"<br />", map.college.data$n.y ," ", input$Pos,
-                             "'s were drafted", round.string)
+                               "'s were drafted", round.string)
     } else if (input$player == "" && input$Pos == "All"){  # If position is All, change to "players"
       college.stats <- paste0(year.string, "<br />", map.college.data$n.y, " players were drafted", round.string)
     } else{ # If single player is searched for
@@ -74,7 +62,7 @@ shinyServer(function(input, output) {
     }
     # Apply line break to labels
     labs = paste0(map.college.data$Official.Name, '<br />', 
-                   college.stats)
+                  college.stats)
     
     # render map
     nfl.map<- map.college.data %>%
@@ -90,14 +78,14 @@ shinyServer(function(input, output) {
                               '<div><span>' + childCount + '</span></div>', 
                               className: 'marker-cluster' + c, iconSize: new 
                               L.Point(40, 40)});}"))),
-      label = lapply(labs, HTML),
-      labelOptions = labelOptions(direction = 'top', style = list()),
-      lng = (as.numeric(map.college.data$LONGITUDE)), lat = (as.numeric(map.college.data$LATITUDE)), icon = makeIcon(
-        iconUrl = map.college.data$X.1,
-        iconWidth = 50, iconHeight = 40)) %>% 
+        label = lapply(labs, HTML),
+        labelOptions = labelOptions(direction = 'top', style = list()),
+        lng = (as.numeric(map.college.data$LONGITUDE)), lat = (as.numeric(map.college.data$LATITUDE)), icon = makeIcon(
+          iconUrl = map.college.data$X.1,
+          iconWidth = 50, iconHeight = 40)) %>% 
       addTiles()
     nfl.map
-  })
+})
   
   output$selectedStats <- renderUI({
     if(input$GenPos == 'QB') {
@@ -134,12 +122,11 @@ shinyServer(function(input, output) {
       title = input$Stat
     )
     
-    plot_ly(plot.data, x = ~Year, y = y, 
+    plot_ly(plot.data, x = ~Year, y = ~Stat, 
             name = "Statistics Plot", 
             type='scatter',
             text = ~paste0('Average ', y, ': ', y, '<br>Year: ', Year)) %>% 
       add_trace(mode = "markers") %>% 
       layout(yaxis = y)
   })
-})
-
+  })
