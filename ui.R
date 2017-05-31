@@ -5,12 +5,14 @@ library(shiny)
 library(leaflet)
 library(shinythemes)
 library(dplyr)
+library(plotly)
 
 shinyUI(
   fluidPage(
     theme = shinytheme("superhero"),
     tabsetPanel(
       # gives a summary of our data collection and what we will be presenting.
+      
       tabPanel(
         "Intro Page",
         titlePanel("NFL statistics"),
@@ -58,6 +60,7 @@ shinyUI(
           verbatimTextOutput("intro page")
         )
       ),
+      
       # A map comparing location with round/position/year
       tabPanel("Map",
         titlePanel(h1("Where Do Draft Picks Come From?", align = 'center')),
@@ -109,6 +112,33 @@ shinyUI(
         )
       )
     ),
+    
+    #  Scatterplot displaying player position statistic per year
+    tabPanel("Scatter Plot",
+             titlePanel(h1("Player Statistics Scatter Plot", align = 'center')),
+             sidebarLayout(
+               sidebarPanel(
+                 selectInput(inputId = "Team", label = "Position Type:", choices = c('Offense', 'Defense'), selected = 'Offense'),
+                 conditionalPanel(
+                   condition = "input.Team == 'Offense'",
+                   selectInput(inputId = 'GenPos', 'Position:', choices = c('Quarterback' = 'QB', 'Running Back' = 'RB', 'Tight End' = 'TE', 'Wide Receiver' = 'WR', 'Fullback' = 'FB'), selected = 'Quarterback'),
+                   uiOutput('selectedStats')
+                 ),
+                 conditionalPanel(
+                   condition = "input.Team == 'Defense'",
+                   selectInput(inputId = 'GenPos', 'Position:', choices = c('Safety' = 'S', 'Cornerback' = 'CB', 'Defensive End' = 'DE', 'Linebacker' = 'LB', 'Defensive Tackle' = 'NT'), selected = 'Cornerback'),
+                   selectInput(inputId = 'Stat', 'Statistic:', choices = c('Tackles' = 'Tkl', 'Defensive Interceptions' = 'Def_Int', 'Sacks' = 'Sk'), selected = 'Tackles')
+                 ),
+                 hr(),
+                 helpText('Any notes we need to put about the selections')
+               ),
+               mainPanel(
+                 plotlyOutput("statPlot")
+               )
+             )
+      
+    ),
+    
     # Conclusion panel, where seen results are noted.
     tabPanel("Conclusion",
       mainPanel(

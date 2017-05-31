@@ -22,8 +22,8 @@ shinyUI(fluidPage(
       hr(),
       helpText('Any notes we need to put about the selections')
     ),
-  mainPanel(
+    mainPanel(
       plotlyOutput("statPlot")
+    )
   )
-)
 ))
