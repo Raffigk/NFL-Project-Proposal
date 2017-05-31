@@ -1,6 +1,7 @@
 library(shiny)
 library(plotly)
 library(dplyr)
+library(ggplot2)
 
   shinyServer(function(input, output) {
     
@@ -17,11 +18,10 @@ library(dplyr)
     })
     
     output$statPlot <- renderPlotly({
+      print(input$GenPos)
+      
 
       StatAverageByYear <- function(year) {
-        print(input$Team)
-        print(input$GenPos)
-        print(input$Stat)
         cumulative.stat.data <- draft.data %>% filter(GenPos == input$GenPos & Year == year)
         seasons.played <- mean(cumulative.stat.data$To - cumulative.stat.data$Year)        
         stat.data <- cumulative.stat.data %>% select_(input$Stat)
@@ -40,9 +40,9 @@ library(dplyr)
         title = input$Stat
       )
       
-      plot_ly(plot.data, x = ~Year, y = ~Stat, name = "Statistics Plot", type='scatter') %>% 
-        add_trace(mode = "markers") %>% 
-        layout(yaxis = y)
+      plot_ly(plot.data, x = ~Year, y = y, name = "Statistics Plot", type='scatter', mode = "markers")
+      
+      
     })
   })
   
