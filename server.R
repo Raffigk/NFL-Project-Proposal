@@ -106,10 +106,9 @@ shinyServer(function(input, output) {
       selectInput(inputId = 'Stat', 'Statistic:', choices = c('Receptions' = 'Rec', 'Receiving Yards' = 'Rec_Yds', 'Receiving Touchdowns' = 'Rec_Tds'), selected = 'Receiving Yards')
     } else if (input$GenPos == 'RB' | input$GenPos == 'WR' | input$GenPos == 'FB') {
       selectInput(inputId = 'Stat', 'Statistic:', choices = c('Rush Attempts' = 'Rush_Att', 'Rushing Yards' = 'Rush_Yds', 'Receptions' = 'Rec', 'Receiving Yards' = 'Rec_Yds', 'Receiving Touchdowns' = 'Rec_Tds'), selected = 'Rushing Yards')
-    } 
-    #else if (input$GenPos == 'S' | input$GenPos == 'CB' | input$GenPos == 'De' | input$GenPos == 'LB' | input$GenPos == 'NT') {
-    #   selectInput(inputId = 'Stat', 'Statistic:', choices = c('Tackles' = 'Tkl', 'Defensive Interceptions' = 'Def_Int', 'Sacks' = 'Sk'), selected = 'Tackles')
-    # }
+    } else if (input$GenPos == 'S' | input$GenPos == 'CB' | input$GenPos == 'De' | input$GenPos == 'LB' | input$GenPos == 'NT') {
+       selectInput(inputId = 'Stat', 'Statistic:', choices = c('Tackles' = 'Tkl', 'Defensive Interceptions' = 'Def_Int', 'Sacks' = 'Sk'), selected = 'Tackles')
+    }
   })
   
   output$statPlot <- renderPlotly({
