@@ -95,7 +95,7 @@ shinyServer(function(input, output) {
       lng = (as.numeric(map.college.data$LONGITUDE)), lat = (as.numeric(map.college.data$LATITUDE)), icon = makeIcon(
         iconUrl = map.college.data$X.1,
         iconWidth = 50, iconHeight = 40)) %>% 
-      addTiles()
+      addTiles(),
     nfl.map
   })
   
@@ -134,7 +134,7 @@ shinyServer(function(input, output) {
       title = input$Stat
     )
     
-    plot_ly(plot.data, x = ~Year, y = y, 
+    plot_ly(plot.data, x = ~Year, y = ~Stat, 
             name = "Statistics Plot", 
             type='scatter',
             text = ~paste0('Average ', y, ': ', y, '<br>Year: ', Year)) %>% 

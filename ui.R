@@ -119,7 +119,6 @@ shinyUI(
              titlePanel(h1("Player Statistics Scatter Plot", align = 'center')),
              sidebarLayout(
                sidebarPanel(
-                 # #Backup Code
                  selectInput(inputId = 'GenPos', 'Position:', 
                              choices = c('Quarterback (O)' = 'QB', 'Running Back (O)' = 'RB', 'Tight End (O)' = 'TE', 'Wide Receiver (O)' = 'WR', 'Fullback (O)' = 'FB', 'Cornerback (D)' = 'CB', 'Defensive End (D)' = 'DE', 'Linebacker (D)' = 'LB', 'Defensive Tackle (D)' = 'NT'), 
                              selected = 'Quarterback'),
@@ -127,7 +126,6 @@ shinyUI(
                  hr(),
                  helpText("O: Offensive Position"),
                  helpText("D: Defensive Position")
-                 
                ),
                mainPanel(
                  plotlyOutput("statPlot")
