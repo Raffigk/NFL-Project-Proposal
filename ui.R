@@ -27,7 +27,7 @@ shinyUI(
           us information about the location of all colleges in the United States, found ",
           a("here", href ="https://nces.ed.gov/ipeds/datacenter/DataFiles.aspx"),
           "(the data set titled
-          “Directory Information(cant find this, need better directions”). We will be using
+          ???Directory Information(cant find this, need better directions???). We will be using
           this data set to map each college that players in the NFL played at."),
         h3("Inspirations to look deeper"),
         p("With the NFL being such a popular sport, there were plenty of unanswered 
@@ -118,19 +118,27 @@ shinyUI(
              titlePanel(h1("Player Statistics Scatter Plot", align = 'center')),
              sidebarLayout(
                sidebarPanel(
-                 selectInput(inputId = "Team", label = "Position Type:", choices = c('Offense', 'Defense'), selected = 'Offense'),
-                 conditionalPanel(
-                   condition = "input.Team == 'Offense'",
-                   selectInput(inputId = 'GenPos', 'Position:', choices = c('Quarterback' = 'QB', 'Running Back' = 'RB', 'Tight End' = 'TE', 'Wide Receiver' = 'WR', 'Fullback' = 'FB'), selected = 'Quarterback'),
-                   uiOutput('selectedStats')
-                 ),
-                 conditionalPanel(
-                   condition = "input.Team == 'Defense'",
-                   selectInput(inputId = 'GenPos', 'Position:', choices = c('Safety' = 'S', 'Cornerback' = 'CB', 'Defensive End' = 'DE', 'Linebacker' = 'LB', 'Defensive Tackle' = 'NT'), selected = 'Cornerback'),
-                   selectInput(inputId = 'Stat', 'Statistic:', choices = c('Tackles' = 'Tkl', 'Defensive Interceptions' = 'Def_Int', 'Sacks' = 'Sk'), selected = 'Tackles')
-                 ),
+                 # #Backup Code
+                 selectInput(inputId = 'GenPos', 'Position:', choices = c('Quarterback (O)' = 'QB', 'Running Back (O)' = 'RB', 'Tight End (O)' = 'TE', 'Wide Receiver (O)' = 'WR', 'Fullback (O)' = 'FB', 'Cornerback (D)' = 'CB', 'Defensive End (D)' = 'DE', 'Linebacker (D)' = 'LB', 'Defensive Tackle (D)' = 'NT'), selected = 'Quarterback'),
+                 uiOutput('selectedStats'),
                  hr(),
-                 helpText('Any notes we need to put about the selections')
+                 helpText("O: Offensive Position"),
+                 helpText("D: Defensive Position")
+                 
+                 #This code is problematic
+                 # selectInput(inputId = "Team", label = "Position Type:", choices = c('Offense', 'Defense'), selected = 'Offense'),
+                 # conditionalPanel(
+                 #   condition = "input.Team == 'Offense'",
+                 #   selectInput(inputId = 'GenPos', 'Position:', choices = c('Quarterback' = 'QB', 'Running Back' = 'RB', 'Tight End' = 'TE', 'Wide Receiver' = 'WR', 'Fullback' = 'FB'), selected = 'Quarterback')
+                 # ),
+                 # conditionalPanel(
+                 #   condition = "input.Team == 'Defense'",
+                 #   selectInput(inputId = 'GenPos', 'Position:', choices = c('Safety' = 'S', 'Cornerback' = 'CB', 'Defensive End' = 'DE', 'Linebacker' = 'LB', 'Defensive Tackle' = 'NT'), selected = 'Cornerback')
+                 #   #selectInput(inputId = 'Stat', 'Statistic:', choices = c('Tackles' = 'Tkl', 'Defensive Interceptions' = 'Def_Int', 'Sacks' = 'Sk'), selected = 'Tackles')
+                 # ),
+                 # uiOutput('selectedStats'),
+                 # hr(),
+                 # helpText('Any notes we need to put about the selections')
                ),
                mainPanel(
                  plotlyOutput("statPlot")
@@ -148,7 +156,3 @@ shinyUI(
   )
 )
 
-#conditionalPanel(
-# condition = "input.Pos == 'S'", #| input.Pos == 'CB' | input.Pos == 'DE' | input.Pos == 'LB' | input.Pos == 'NT'",
-# selectInput(inputId = 'Statistic', 'Statistic:', choices = c('Tackles' = 'Tkl', 'Defensive Interceptions' = 'Def_Int', 'Sacks' = 'Sk'), selected = 'Tackles')
-#),
