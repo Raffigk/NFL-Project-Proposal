@@ -21,6 +21,8 @@ shinyServer(function(input, output) {
       # Filter Round
       player.data <- player.data %>% filter(Rnd >= input$round[1] & Rnd <= input$round[2])
       
+      
+      
       ### Attempt to filter by team and pos inputs ---- Only filters with team, does not work with Position ####
       if (input$Team != 'Both'){
         player.data <- player.data %>% filter(Team == input$Team)
@@ -29,6 +31,16 @@ shinyServer(function(input, output) {
         }
       }
     }
+    
+    ouput$selectedPosition <- renderUI({
+      if (input$Team = "Offense") {
+        selectedInput(inputID = 'Pos', "Position:",
+                      choices = c('All' = 'All', 'Quarterback' = 'QB', 'Running Back' = 'RB', 'Tight End' = 'TE', 'Wide Receiver' = 'WR', 'Fullback' = 'FB'), selected = "All")
+      } else if (input$Team == "Defense") {
+        selectInput(inputId = 'Pos', 'Position:', 
+                    choices = c('All' = 'All', 'Safety' = 'S', 'Cornerback' = 'CB', 'Defensive End' = 'DE', 'Linebacker' = 'LB', 'Defensive Tackle' = 'NT'), selected = "All")
+      }
+    })
     
     # Filters colleges to be ploted to only the colleges with draft picks meeting the criteria above
     map.college.data <- college.data %>% filter(Official.Name %in% player.data$Official.Name)

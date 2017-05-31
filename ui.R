@@ -98,22 +98,11 @@ shinyUI(
               selectInput(inputId = 'Pos', "Position:",
                 choices = c('All' = 'All'),
                 selected = 'All')
-            ),
-            #If the Position Type is Offense, select offensive positions
-            conditionalPanel(
-              condition = "input.Team == 'Offense'", 
-              selectInput(inputId = 'Pos', 'Position:', 
-                choices = c('All' = 'All', 'Quarterback' = 'QB', 'Running Back' = 'RB', 'Tight End' = 'TE', 'Wide Receiver' = 'WR', 'Fullback' = 'FB'), 
-                selected = 'All')
-            ),
-            #If the Position Type is Defense, select defensive positions      
-            conditionalPanel(
-              condition = "input.Team == 'Defense'",
-              selectInput(inputId = 'Pos', 'Position:', 
-                choices = c('All' = 'All', 'Safety' = 'S', 'Cornerback' = 'CB', 'Defensive End' = 'DE', 'Linebacker' = 'LB', 'Defensive Tackle' = 'NT'), 
-                selected = 'All')
             )
+            #If the Position Type is Offense, select offensive positions
+        
           ),
+          uiOutput('selectedPosition'),
           hr(),
           helpText("Data for years 1993/2003 missing from dataset")
         ),
