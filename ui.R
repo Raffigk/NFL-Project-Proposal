@@ -9,7 +9,7 @@ library(plotly)
 
 shinyUI(
   fluidPage(
-    theme = shinytheme("superhero"),
+    theme = shinytheme("united"),
     tabsetPanel(
       # gives a summary of our data collection and what we will be presenting.
       
@@ -17,6 +17,9 @@ shinyUI(
         "Intro Page",
         titlePanel("NFL statistics"),
         h4("Michelle Ho, Raffi Gharakhanian, Jon Cantle, Josh Dugger"),
+        
+        hr(),
+        
         h3("The Data"),
         p("We discovered a data set containing information on NFL players drafted from the years 1985 to 2015, ",
           a("here(ERROR)", href = "https://www.kaggle.com/ronaldjgrafjr/nfl-draft-outcome"),
@@ -29,6 +32,9 @@ shinyUI(
           "(the data set titled
           ???Directory Information(cant find this, need better directions???). We will be using
           this data set to map each college that players in the NFL played at."),
+      
+        br(),
+        
         h3("Inspirations to look deeper"),
         p("With the NFL being such a popular sport, there were plenty of unanswered 
            questions that we found could be answered through our data sets."),
@@ -40,6 +46,9 @@ shinyUI(
         p("- What different characteristics (college, location, round picked in, year picked"),
         p("- How the year the player was picked, and the years they played in,
           affect the statistics the player has throughout their career?"),
+        
+        br(),
+        
         h3("Displaying our Findings/ Our Data Visualizations:"),
         h4("Map of colleges"),
         p("We created a map of all the colleges in the United States that had players drafted from
@@ -49,6 +58,7 @@ shinyUI(
         p("We were expecting results that could indicate to us which colleges were stronger 
           when it came to supplying players to the NFL, and how the position and the year could change 
           which colleges were stronger (paragraph needs to be worded better) "),
+        
         h4("Scatter plot of player statistics"),
         p("We had an idea that over the years, the NFL has changed drastically. These changes have resulted
           in the game being played differently, resulting in priorities changing, and ultimitely statistics."),
@@ -108,7 +118,9 @@ shinyUI(
           helpText("Data for years 1993/2003 missing from dataset")
         ),
         mainPanel(
-          leafletOutput("map")
+          leafletOutput("map"),
+          br(),
+          p('hello')
         )
       )
     ),
@@ -127,20 +139,6 @@ shinyUI(
                  helpText("O: Offensive Position"),
                  helpText("D: Defensive Position")
                  
-                 #This code is problematic
-                 # selectInput(inputId = "Team", label = "Position Type:", choices = c('Offense', 'Defense'), selected = 'Offense'),
-                 # conditionalPanel(
-                 #   condition = "input.Team == 'Offense'",
-                 #   selectInput(inputId = 'GenPos', 'Position:', choices = c('Quarterback' = 'QB', 'Running Back' = 'RB', 'Tight End' = 'TE', 'Wide Receiver' = 'WR', 'Fullback' = 'FB'), selected = 'Quarterback')
-                 # ),
-                 # conditionalPanel(
-                 #   condition = "input.Team == 'Defense'",
-                 #   selectInput(inputId = 'GenPos', 'Position:', choices = c('Safety' = 'S', 'Cornerback' = 'CB', 'Defensive End' = 'DE', 'Linebacker' = 'LB', 'Defensive Tackle' = 'NT'), selected = 'Cornerback')
-                 #   #selectInput(inputId = 'Stat', 'Statistic:', choices = c('Tackles' = 'Tkl', 'Defensive Interceptions' = 'Def_Int', 'Sacks' = 'Sk'), selected = 'Tackles')
-                 # ),
-                 # uiOutput('selectedStats'),
-                 # hr(),
-                 # helpText('Any notes we need to put about the selections')
                ),
                mainPanel(
                  plotlyOutput("statPlot")
