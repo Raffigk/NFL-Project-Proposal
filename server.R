@@ -122,8 +122,8 @@ shinyServer(function(input, output) {
       title = input$Stat
     )
     
-    plot_ly(plot.data, x = ~Year, y = y, name = "Statistics Plot", type='scatter', mode = "markers")
-    
+    plot_ly(plot.data, x = ~Year, y = ~Stat, name = "Statistics Plot", type='scatter', mode = "markers") %>% 
+      layout(yxis = y)
     
   })
 })
