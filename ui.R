@@ -7,6 +7,8 @@ library(shinythemes)
 library(dplyr)
 library(plotly)
 
+source('./OrganizeData.R')
+
 shinyUI(
   fluidPage(
     theme = shinytheme("united"),
@@ -125,7 +127,8 @@ shinyUI(
                  uiOutput('selectedStats'),
                  hr(),
                  helpText("O: Offensive Position"),
-                 helpText("D: Defensive Position")
+                 helpText("D: Defensive Position"),
+                 helpText("Note: any unavailable data points are due to gaps in the original data")
                ),
                mainPanel(
                  plotlyOutput("statPlot")
