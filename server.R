@@ -47,14 +47,12 @@ shinyServer(function(input, output) {
       year.string <- paste0("Between the years ", input$Year[1], " and ", input$Year[2], ", ")
     }
     
-    #### Josh needs to be explained what is going on here ####
     number.per.uni <- player.data %>% count(Official.Name)
     map.college.data <- left_join(map.college.data, number.per.uni, by = "Official.Name")
-    View(map.college.data)
-    
+
     # Stats for the college label, how many picks during the year and what position.
     if (input$player == "" && input$Pos != "All") {
-      college.stats <-  paste0(year.string,"<br />", map.college.data$n.x ," ", input$Pos,
+      college.stats <-  paste0(year.string,"<br />", map.college.data$n.y ," ", input$Pos,
                              "'s were drafted", round.string)
     } else if (input$player == "" && input$Pos == "All"){  # If position is All, change to "players"
       college.stats <- paste0(year.string, "<br />", map.college.data$n.y, " players were drafted", round.string)
