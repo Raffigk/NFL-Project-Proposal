@@ -51,7 +51,7 @@ shinyServer(function(input, output) {
     
     # Stats for the college label, how many picks during the year and what position.
     if (input$player == "" && input$GenPos != "All") {
-      college.stats <-  paste0(year.string,"<br />", map.college.data$n.y ," ", input$Pos,
+      college.stats <-  paste0(year.string,"<br />", map.college.data$n.y ," ", input$GenPos,
                                "'s were drafted", round.string)
     } else if (input$player == "" && input$GenPos == "All"){  # If position is All, change to "players"
       college.stats <- paste0(year.string, "<br />", map.college.data$n.y, " players were drafted", round.string)
