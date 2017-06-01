@@ -128,6 +128,7 @@ shinyUI(
              titlePanel(h1("Player Statistics Scatter Plot", align = 'center')),
              sidebarLayout(
                sidebarPanel(
+                 #Select position in UI
                  selectInput(inputId = 'GenPos2', 'Position:', 
                              choices = c('Quarterback (O)' = 'QB', 'Running Back (O)' = 'RB', 'Tight End (O)' = 'TE', 
                                          'Wide Receiver (O)' = 'WR', 'Fullback (O)' = 'FB', 'Cornerback (D)' = 'CB', 

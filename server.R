@@ -87,7 +87,7 @@ shinyServer(function(input, output) {
     nfl.map
 })
   
-  
+  #Changes statistics based on position chosen in UI
   output$selectedStats <- renderUI({
     if(input$GenPos2 == 'QB') {
       selectInput(inputId = 'Stat', 'Statistic:', choices = c('Pass Completions' = 'Cmp', 'Pass Attempts' = 'Pass_Att', 'Passing Yards' = 'Pass_Yds', 'Pass Interceptions' = 'Pass_Int', 'Rush Attempts' = 'Rush_Att', 'Rushing Yards' = 'Rush_Yds'), selected = 'Passing Yards')
@@ -100,8 +100,10 @@ shinyServer(function(input, output) {
     }
   })
   
+  #Renders scatter plot based on position and statistic chosen
   output$statPlot <- renderPlotly({
     
+    #Selects column of statistic and position the user chose and creates a dataframe by year
     StatAverageByYear <- function(year) {
       cumulative.stat.data <- draft.data %>% filter(GenPos2 == input$GenPos2 & Year == year)
       seasons.played <- mean(cumulative.stat.data$To - cumulative.stat.data$Year)        
@@ -113,10 +115,12 @@ shinyServer(function(input, output) {
       data.plot <- data.frame(Year = year, Stat = ave.stat)
       return(data.plot)
     }
-    year <- unique(draft.data$Year)
-    plot.data <- lapply(year, StatAverageByYear) %>% bind_rows()
+    
+    year <- unique(draft.data$Year) #List of years from 1985-2015
+    plot.data <- lapply(year, StatAverageByYear) %>% bind_rows() #applies StatAverageByYear to include all years
     plot.data <- unique(plot.data)
     
+    #Changes title of Y-Axis
     y <- list(
       title = paste0(input$Stat,' / Season')
     )
