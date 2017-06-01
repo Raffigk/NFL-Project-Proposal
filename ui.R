@@ -152,8 +152,6 @@ shinyUI(
              titlePanel("Our Findings"),
              hr(),
              
-             h3('Important Descriptive Information'),
-             
              h3('Major Trends'),
              p('We were able to discover that the way NFL players play have noticeably changed since 1985. For example, 
                from our scatter plot, on average, all quarterback passing statistics have gone up, while all running 

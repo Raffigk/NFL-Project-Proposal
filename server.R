@@ -3,6 +3,7 @@ library(dplyr)
 library(leaflet)
 library(stringr)
 
+
 # Define server logic for slider examples
 shinyServer(function(input, output) {
   # Show the values using an HTML table
