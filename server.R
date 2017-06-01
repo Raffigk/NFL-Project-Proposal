@@ -123,11 +123,10 @@ shinyServer(function(input, output) {
       title = input$Stat
     )
     
-    plot_ly(plot.data, x = ~Year, y = ~Stat, 
+    plot_ly(plot.data, x = ~Year, y = ~Stat,
             name = "Statistics Plot", 
             type='scatter',
-            text = ~paste0('Average ', y, ': ', y, '<br>Year: ', Year)) %>% 
-      add_trace(mode = "markers") %>% 
+            text = ~paste0('Average ', y, ' For Year: ', round(Stat, digits = 2), '<br>Year: ', Year)) %>% 
       layout(yaxis = y)
   })
   })
