@@ -159,12 +159,11 @@ shinyUI(
              
              h3('Major Trends'),
              p('We were able to uncover trends in the changes of statistics across different football positions. For example, 
-               from our scatter plot, on average, all quarterback passing statistics have increase, while all running 
-               back statistics have decrease. This helps visualize the theory that passing has become more prevalent 
+               from our scatter plot, on average, all quarterback passing statistics have increase. This helps visualize the theory that passing has become more prevalent 
                in the game overtime. Thus, in answering our initial question, does the year the player was picked, and the years they played in,
-               affect the player\'s performance throughout their career?
-               
-               Our map gave us great insight on where a majority of draft picks have come from in the past 30 years.
+               affect the player\'s performance throughout their career?'),
+              hr(), 
+               p('Our map gave us great insight on where a majority of draft picks have come from in the past 30 years.
                Almost half of all draft picks in this time came from the South. This trend has remained consistent throughout
                the timeframe we have been analyzing. The map also allows users to identify periods of great success 
                or failure for all college teams. For example, the University of Washington had 3 times as many picks in rounds 
