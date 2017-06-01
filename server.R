@@ -16,7 +16,6 @@ shinyServer(function(input, output) {
     college.data <- read.csv("data/map.college.data.csv", stringsAsFactors = FALSE)
     if (input$player != ""){
       player.data <- player.data %>% filter(grepl(input$player, Player))
-      View(player.data)
     } else{
       # Filter Year Range
       player.data <- player.data %>% filter(Year >= input$Year[1] & Year <= input$Year[2])
