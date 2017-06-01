@@ -46,7 +46,9 @@ shinyServer(function(input, output) {
       year.string <- paste0("Between the years ", input$Year[1], " and ", input$Year[2], ", ")
     }
     
+    #Count of number of players that are drafted
     number.per.uni <- player.data %>% count(Official.Name)
+    #combined together
     map.college.data <- left_join(map.college.data, number.per.uni, by = "Official.Name")
     
     # Stats for the college label, how many picks during the year and what position.
@@ -85,6 +87,7 @@ shinyServer(function(input, output) {
       addTiles()
     nfl.map
 })
+  
   
   output$selectedStats <- renderUI({
     if(input$GenPos2 == 'QB') {
