@@ -12,7 +12,7 @@ shinyServer(function(input, output) {
     # data for all players
     player.data <- read.csv("data/All_Players_Data.csv")  #From OrganizeData, need to write a csv for this.
     # data for each individual college
-    college.data <- read.csv("Data/map.college.data.csv", stringsAsFactors = FALSE)
+    college.data <- read.csv("data/map.college.data.csv", stringsAsFactors = FALSE)
     if (input$player != ""){
       player.data <- player.data %>% filter(grepl(input$player, Player))
       View(player.data)

@@ -23,7 +23,7 @@ map.college.data <- left_join(x = count.player.per.college, y = individual.colle
 
 
 
-write.csv(map.college.data, file = "Data/map.college.data.csv", row.names = FALSE)
+write.csv(map.college.data, file = "data/map.college.data.csv", row.names = FALSE)
 players.college.data <- left_join(x = map.college.data, y = nfl.map.data, by = "Official.Name")
-write.csv(players.college.data, file = "Data/map.player.data.csv", row.names = FALSE)
+write.csv(players.college.data, file = "data/map.player.data.csv", row.names = FALSE)
 
