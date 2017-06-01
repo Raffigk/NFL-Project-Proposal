@@ -12,8 +12,8 @@ shinyUI(
   fluidPage(
     theme = shinytheme("united"),
     tabsetPanel(
-      # gives a summary of our data collection and what we will be presenting.
-      
+     
+       # gives a summary of our data collection and what we will be presenting.
       tabPanel(
         "Intro Page",
         titlePanel("NFL statistics"),
