@@ -128,7 +128,7 @@ shinyUI(
              titlePanel(h1("Player Statistics Scatter Plot", align = 'center')),
              sidebarLayout(
                sidebarPanel(
-                 selectInput(inputId = 'GenPos', 'Position:', 
+                 selectInput(inputId = 'Pos', 'Position:', 
                              choices = c('Quarterback (O)' = 'QB', 'Running Back (O)' = 'RB', 'Tight End (O)' = 'TE', 
                                          'Wide Receiver (O)' = 'WR', 'Fullback (O)' = 'FB', 'Cornerback (D)' = 'CB', 
                                          'Defensive End (D)' = 'DE', 'Linebacker (D)' = 'LB', 'Defensive Tackle (D)' = 'NT'), 
@@ -160,8 +160,8 @@ shinyUI(
              p('We were able to discover that the way NFL players play have noticeably changed since 1985. For example, 
                from our scatter plot, on average, all quarterback passing statistics have gone up, while all running 
                back statistics have gone down. This reflects and proves the theory that passing has become more prevalent 
-               in the game overtime. Thus, in answering our initial question, “Does the year the player was picked affect 
-               the statistics the player has throughout their career?”, we are able to acknowledge that there is a relationship 
+               in the game overtime. Thus, in answering our initial question, ???Does the year the player was picked affect 
+               the statistics the player has throughout their career????, we are able to acknowledge that there is a relationship 
                between the year and player statistics.'),
              
              h3('Notable Outliers'),

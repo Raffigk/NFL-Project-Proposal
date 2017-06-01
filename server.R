@@ -25,7 +25,7 @@ shinyServer(function(input, output) {
       player.data <- player.data %>% filter(Rnd >= input$round[1] & Rnd <= input$round[2])
       
       #Filter the player type needed.
-      if (input$GenPos != 'All') {
+      if (input$Pos != 'All') {
         player.data <- filter(player.data, GenPos == input$GenPos)
       }
     }
