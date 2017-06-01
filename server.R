@@ -24,28 +24,10 @@ shinyServer(function(input, output) {
       # Filter Round
       player.data <- player.data %>% filter(Rnd >= input$round[1] & Rnd <= input$round[2])
       
-      ### Attempt to filter by team and pos inputs ---- Only filters with team, does not work with Position ####
-      output$selectedPosition <- renderUI({
-        print('Before Conditional')
-        if (input$Team == 'Offense') {
-          print('Offense Conditional')
-          selectInput(inputId = 'Pos', "Position:",
-                      choices = c('Quarterback' = 'QB', 'Running Back' = 'RB', 'Tight End' = 'TE', 'Wide Receiver' = 'WR', 'Fullback' = 'FB', 'All' = 'All'))
-        } else if (input$Team == 'Defense'){
-          print('Defense Conditional')
-          selectInput(inputId = 'Pos', "Position:",
-                      choices = c('Cornerback' = 'CB', 'Defensive End' = 'DE', 'Linebacker' = 'LB', 'Defensive Tackle' = 'NT','All' = 'All'))
-        } else {
-          print('Both')
-          selectInput(inputId = 'Pos', "Position:",
-                      choices = c('All' = 'All'))
-        }
-      })
-      if (input$Team != 'Both' & input$Pos != 'All') {
-        print(input$Team)
-        print(input$Pos)
-        player.data <- filter(player.data, Pos == input$Pos)
-      } 
+      #Filter the player type needed.
+      if (input$GenPos != 'All') {
+        player.data <- filter(player.data, GenPos == input$GenPos)
+      }
     }
     
     # Filters colleges to be ploted to only the colleges with draft picks meeting the criteria above
