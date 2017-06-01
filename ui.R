@@ -100,11 +100,11 @@ shinyUI(
             sliderInput(inputId = "round", "Choose the Round(s)",
               min = 1, max = 12,  value = c(1, 12), sep = ""),
             #Select Team Type
-            selectInput(inputId = "GenPos", "Position:", choices = c('Quarterback(O)' = 'QB', 'Running Back(O)' = 'RB', 'Tight End(O)' = 'TE',
+            selectInput(inputId = "GenPos", "Position:", choices = c('All' = 'All', 'Quarterback(O)' = 'QB', 'Running Back(O)' = 'RB', 'Tight End(O)' = 'TE',
                                                                   'Wide Receiver(O)' = 'WR', 'Fullback(O)' = 'FB', 'Center(O)' = 'C',"Guard(O)" = 'G','Tackle(O)' = 'T',
                                                                   'Kicker(ST)'= 'K','Punter(ST)' = 'P','Long Snapper(O)' = 'LS','Cornerback(D)' = 'CB', 
-                                                                  'Defensive End(D)' = 'DE', 'Linebacker(D)' = 'LB', 'Defensive Tackle(D)' = 'NT',
-                                                                  'All' = 'All'), selected = "All")
+                                                                  'Defensive End(D)' = 'DE', 'Linebacker(D)' = 'LB', 'Defensive Tackle(D)' = 'NT'
+                                                                  ), selected = "All")
   
 
         
@@ -128,7 +128,7 @@ shinyUI(
              titlePanel(h1("Player Statistics Scatter Plot", align = 'center')),
              sidebarLayout(
                sidebarPanel(
-                 selectInput(inputId = 'Pos', 'Position:', 
+                 selectInput(inputId = 'GenPos2', 'Position:', 
                              choices = c('Quarterback (O)' = 'QB', 'Running Back (O)' = 'RB', 'Tight End (O)' = 'TE', 
                                          'Wide Receiver (O)' = 'WR', 'Fullback (O)' = 'FB', 'Cornerback (D)' = 'CB', 
                                          'Defensive End (D)' = 'DE', 'Linebacker (D)' = 'LB', 'Defensive Tackle (D)' = 'NT'), 

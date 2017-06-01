@@ -48,6 +48,8 @@ Agg_Position <- function(pos) {
 # Because some positions are very specific, add a column to the dataframe that provides a generalized position for each player
 draft.data <- draft.data %>%
   mutate(GenPos = (lapply(draft.data$Pos, Agg_Position)))
+draft.data <- draft.data %>% 
+  mutate(GenPos2 = (lapply(draft.data$Pos, Agg_Position)))
 
 #Adds 2016 as year to for players who have only played one year
 draft.data <- draft.data %>%
