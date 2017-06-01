@@ -7,7 +7,7 @@ library(shinythemes)
 library(dplyr)
 library(plotly)
 
-source('./OrganizeData.R')
+source('./scripts/OrganizeDraftData.R')
 
 shinyUI(
   fluidPage(
