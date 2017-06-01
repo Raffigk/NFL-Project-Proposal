@@ -3,6 +3,7 @@ library(dplyr)
 library(leaflet)
 library(stringr)
 
+setwd("~/Desktop/INFO201/NFL-Project-Proposal")
 source('./scripts/OrganizeDraftData.R')
 
 # Define server logic for slider examples
