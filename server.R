@@ -3,7 +3,6 @@ library(dplyr)
 library(leaflet)
 library(stringr)
 
-setwd("~/Desktop/INFO201/NFL-Project-Proposal")
 source('./scripts/OrganizeDraftData.R')
 
 # Define server logic for slider examples
@@ -14,7 +13,7 @@ shinyServer(function(input, output) {
     player.data <- draft.data  #From OrganizeData, need to write a csv for this.
     
     # data for each individual college
-    college.data <- read.csv("Data/map.college.data.csv", stringsAsFactors = FALSE)
+    college.data <- read.csv("data/map.college.data.csv", stringsAsFactors = FALSE)
     if (input$player != ""){
       player.data <- player.data %>% filter(grepl(input$player, Player))
       View(player.data)
