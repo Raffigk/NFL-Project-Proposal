@@ -14,7 +14,6 @@ shinyServer(function(input, output) {
     
     # data for each individual college
     college.data <- read.csv("Data/map.college.data.csv", stringsAsFactors = FALSE)
-    print('Before Anything')
     if (input$player != ""){
       player.data <- player.data %>% filter(grepl(input$player, Player))
       View(player.data)
@@ -102,7 +101,6 @@ shinyServer(function(input, output) {
   output$statPlot <- renderPlotly({
     
     StatAverageByYear <- function(year) {
-      print('R')
       cumulative.stat.data <- draft.data %>% filter(GenPos2 == input$GenPos2 & Year == year)
       seasons.played <- mean(cumulative.stat.data$To - cumulative.stat.data$Year)        
       stat.data <- cumulative.stat.data %>% select_(input$Stat)
@@ -118,7 +116,7 @@ shinyServer(function(input, output) {
     plot.data <- unique(plot.data)
     
     y <- list(
-      title = input$Stat
+      title = paste0(input$Stat,' / Season')
     )
     
     plot_ly(plot.data, x = ~Year, y = ~Stat,

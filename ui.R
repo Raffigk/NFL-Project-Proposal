@@ -17,7 +17,7 @@ shinyUI(
       tabPanel(
         "Intro Page",
         titlePanel("NFL statistics"),
-        h4("Michelle Ho, Raffi Gharakhanian, Jon Cantle, Josh Dugger"),
+        h4("Raffi Gharakhanian, Jon Cantle, Michelle Ho, Josh Dugger"),
         
         hr(),
         
@@ -52,7 +52,7 @@ shinyUI(
         p("- Is there a relationship between the college location and strength of position for
           a particular player?"),
         p("- What different characteristics (college, location, round picked in, year picked"),
-        p("- How the year the player was picked, and the years they played in,
+        p("- How does the year the player was picked, and the years they played in,
           affect the statistics the player has throughout their career?"),
         
         br(),
@@ -90,7 +90,7 @@ shinyUI(
           #User input a player name 
           textInput("player", label = h5("Player select"), value = "", width = NULL,
             placeholder = "Choose a player"),
-          helpText("For example : Aaron Rodgers"),
+          helpText("For example : Tom Brady"),
           hr(),
           conditionalPanel( condition = "input.player == ''",
             #Slider for year selector
@@ -137,7 +137,8 @@ shinyUI(
                  hr(),
                  helpText("O: Offensive Position"),
                  helpText("D: Defensive Position"),
-                 helpText("Note: any unavailable data points are due to gaps in the original data")
+                 helpText("Note: any unavailable data points and any extremely low data
+                          points between 1985 and 1993 are due to discrepancies in the original data.")
                ),
                mainPanel(
                  plotlyOutput("statPlot"),
@@ -157,17 +158,24 @@ shinyUI(
              hr(),
              
              h3('Major Trends'),
-             p('We were able to discover that the way NFL players play have noticeably changed since 1985. For example, 
-               from our scatter plot, on average, all quarterback passing statistics have gone up, while all running 
-               back statistics have gone down. This reflects and proves the theory that passing has become more prevalent 
-               in the game overtime. Thus, in answering our initial question, ???Does the year the player was picked affect 
-               the statistics the player has throughout their career????, we are able to acknowledge that there is a relationship 
-               between the year and player statistics.'),
+             p('We were able to uncover trends in the changes of statistics across different football positions. For example, 
+               from our scatter plot, on average, all quarterback passing statistics have increase, while all running 
+               back statistics have decrease. This helps visualize the theory that passing has become more prevalent 
+               in the game overtime. Thus, in answering our initial question, does the year the player was picked, and the years they played in,
+               affect the player\'s performance throughout their career?
+               
+               Our map gave us great insight on where a majority of draft picks have come from in the past 30 years.
+               Almost half of all draft picks in this time came from the South. This trend has remained consistent throughout
+               the timeframe we have been analyzing. The map also allows users to identify periods of great success 
+               or failure for all college teams. For example, the University of Washington had 3 times as many picks in rounds 
+               1 through 3 from 1995-2000 than from 2004-2009; this data is consistent with the win/loss records of the teams
+               during these two periods. During the first period the team had a winning record for 5 straight seasons but a 
+               losing record for all seasons in the second period.'),
              
              h3('Notable Outliers'),
              p('One notable outlier we noticed was that since 2010, the average amount of yards rushed by quarterbacks 
-               has risen substantially. There are significant outliers that are present in our scatterplot from years 
-               2010-2015, which shows that a large shift since 1985.'),
+               has risen substantially; it is common knowledge amongst football fans that quarterbacks are infact running
+               more than they did in the past.'),
              
       mainPanel(
         verbatimTextOutput("conclusion"))
