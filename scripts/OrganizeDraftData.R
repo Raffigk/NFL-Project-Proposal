@@ -2,11 +2,12 @@ library(dplyr)
 library(plotly)
 
 # Scatterplot that maps position to type of statistic, based on round pick
-#setwd("~/Desktop/INFO201/NFL-Project-Proposal")
+setwd("~/Documents/INFO 201/Group Project/NFL-Project-Proposal")
 full.draft.data <- read.csv('data/Final_Draft_Data.csv', stringsAsFactors = FALSE)
 #Data for this chart
-draft.data <- full.draft.data %>% 
-  select(Year, Rnd, Pick, Player, Pos, Cmp, Pass_Att, Pass_Yds, Pass_Int, Rush_Att, Rush_Yds, Rush_TDs, Rec, Rec_Yds, Rec_Tds, Tkl, Def_Int, Sk, Official.Name, To, Age, Tm)
+draft.data <- subset(full.draft.data, select = c(Year, Rnd, Pick, Player, Pos, Cmp, Pass_Att, Pass_Yds, Pass_Int, Rush_Att,
+                                                 Rush_Yds, Rush_TDs, Rec, Rec_Yds, Rec_Tds, Tkl, Def_Int, Sk, Official.Name, To, Age, Tm))
+write.csv(draft.data, file = "data/All_Players_Data.csv")
 
 defense.team <- c('DT', 'DE', 'DB', 'MLB', 'OLB', 'CB', 'S', 'FS', 'ILB', 'DL', 'SS', 'LB')
 offense.team <- c('C', 'G', 'T', 'QB', 'RB', 'WR', 'TE', 'OL', 'NT', 'FB')

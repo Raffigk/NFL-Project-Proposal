@@ -9,7 +9,7 @@ shinyServer(function(input, output) {
   # Show the values using an HTML table
   output$map <- renderLeaflet({
     # data for all players
-    player.data <- draft.data  #From OrganizeData, need to write a csv for this.
+    player.data <- read.csv("data/All_Players_Data.csv")  #From OrganizeData, need to write a csv for this.
     
     # data for each individual college
     college.data <- read.csv("Data/map.college.data.csv", stringsAsFactors = FALSE)
@@ -55,9 +55,9 @@ shinyServer(function(input, output) {
     # Stats for the college label, how many picks during the year and what position.
     if (input$player == "" && input$Pos != "All") {
       college.stats <-  paste0(year.string,"<br />", map.college.data$n.y ," ", input$Pos,
-                               "'s were drafted", round.string)
+                               "(s) were drafted", round.string)
     } else if (input$player == "" && input$Pos == "All"){  # If position is All, change to "players"
-      college.stats <- paste0(year.string, "<br />", map.college.data$n.y, " players were drafted", round.string)
+      college.stats <- paste0(year.string, "<br />", map.college.data$n.y, " player(s) were drafted", round.string)
     } else{ # If single player is searched for
       college.stats <- paste0("In ", player.data$Year, ", ", player.data$Player, " was drafted by ", player.data$Tm, ".<br /> He was picked in round ",
                               player.data$Rnd, " (", player.data$Pick, " overall)")
