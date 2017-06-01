@@ -111,7 +111,10 @@ shinyUI(
         mainPanel(
           leafletOutput("map"),
           br(),
-          p('hello')
+          p('We created this map to visualize draft picks across universities in the United States. Using the 
+            widgets in the side panel, one can change the data being displayed on the map by year range or round,
+            or specify a position type and position to analyze. One can even search for a specific NFL player 
+            in the text box.')
         )
       )
     ),
@@ -133,7 +136,12 @@ shinyUI(
                  helpText("Note: any unavailable data points are due to gaps in the original data")
                ),
                mainPanel(
-                 plotlyOutput("statPlot")
+                 plotlyOutput("statPlot"),
+                 br(),
+                 p('The scatter plot above displays the average statistics for a specific position and statistic for each
+                   year from 1985 to 2015. In other words, given a specific position and statistic, the average statistics
+                   for all players careers drafted in the given year are displayed on the plot. Using the widgets in the side panel, 
+                   one can change the position and statistic being analyzed to change the data on the scatterplot.')
                )
              )
       
