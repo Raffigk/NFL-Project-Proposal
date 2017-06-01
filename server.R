@@ -10,9 +10,11 @@ shinyServer(function(input, output) {
   # Show the values using an HTML table
   output$map <- renderLeaflet({
     # data for all players
-    player.data <- read.csv("data/All_Players_Data.csv")  #From OrganizeData, need to write a csv for this.
+    player.data <- draft.data  #From OrganizeData, need to write a csv for this.
+    
     # data for each individual college
-    college.data <- read.csv("data/map.college.data.csv", stringsAsFactors = FALSE)
+    college.data <- read.csv("Data/map.college.data.csv", stringsAsFactors = FALSE)
+    print('Before Anything')
     if (input$player != ""){
       player.data <- player.data %>% filter(grepl(input$player, Player))
       View(player.data)
@@ -23,14 +25,28 @@ shinyServer(function(input, output) {
       player.data <- player.data %>% filter(Rnd >= input$round[1] & Rnd <= input$round[2])
       
       ### Attempt to filter by team and pos inputs ---- Only filters with team, does not work with Position ####
-      if (input$Team != 'Both'){
-        player.data <- player.data %>% filter(Team == input$Team)
-        if (input$Pos != 'All'){
-          player.data <- player.data %>% filter(Pos == input$Pos)
+      output$selectedPosition <- renderUI({
+        print('Before Conditional')
+        if (input$Team == 'Offense') {
+          print('Offense Conditional')
+          selectInput(inputId = 'Pos', "Position:",
+                      choices = c('Quarterback' = 'QB', 'Running Back' = 'RB', 'Tight End' = 'TE', 'Wide Receiver' = 'WR', 'Fullback' = 'FB', 'All' = 'All'))
+        } else if (input$Team == 'Defense'){
+          print('Defense Conditional')
+          selectInput(inputId = 'Pos', "Position:",
+                      choices = c('Cornerback' = 'CB', 'Defensive End' = 'DE', 'Linebacker' = 'LB', 'Defensive Tackle' = 'NT','All' = 'All'))
+        } else {
+          print('Both')
+          selectInput(inputId = 'Pos', "Position:",
+                      choices = c('All' = 'All'))
         }
-      }
+      })
+      if (input$Team != 'Both' & input$Pos != 'All') {
+        print(input$Team)
+        print(input$Pos)
+        player.data <- filter(player.data, Pos == input$Pos)
+      } 
     }
-    
     
     # Filters colleges to be ploted to only the colleges with draft picks meeting the criteria above
     map.college.data <- college.data %>% filter(Official.Name %in% player.data$Official.Name)
@@ -55,9 +71,9 @@ shinyServer(function(input, output) {
     # Stats for the college label, how many picks during the year and what position.
     if (input$player == "" && input$Pos != "All") {
       college.stats <-  paste0(year.string,"<br />", map.college.data$n.y ," ", input$Pos,
-                               "(s) were drafted", round.string)
+                               "'s were drafted", round.string)
     } else if (input$player == "" && input$Pos == "All"){  # If position is All, change to "players"
-      college.stats <- paste0(year.string, "<br />", map.college.data$n.y, " player(s) were drafted", round.string)
+      college.stats <- paste0(year.string, "<br />", map.college.data$n.y, " players were drafted", round.string)
     } else{ # If single player is searched for
       college.stats <- paste0("In ", player.data$Year, ", ", player.data$Player, " was drafted by ", player.data$Tm, ".<br /> He was picked in round ",
                               player.data$Rnd, " (", player.data$Pick, " overall)")
