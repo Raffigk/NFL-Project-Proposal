@@ -2,7 +2,7 @@ library(dplyr)
 library(plotly)
 
 # Scatterplot that maps position to type of statistic, based on round pick
-setwd("~/Documents/INFO 201/Group Project/NFL-Project-Proposal")
+# setwd("~/Documents/INFO 201/Group Project/NFL-Project-Proposal")
 full.draft.data <- read.csv('data/Final_Draft_Data.csv', stringsAsFactors = FALSE)
 #Data for this chart
 draft.data <- subset(full.draft.data, select = c(Year, Rnd, Pick, Player, Pos, Cmp, Pass_Att, Pass_Yds, Pass_Int, Rush_Att,

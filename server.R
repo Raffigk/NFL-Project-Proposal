@@ -3,6 +3,7 @@ library(dplyr)
 library(leaflet)
 library(stringr)
 
+source('./scripts/OrganizeDraftData.R')
 
 # Define server logic for slider examples
 shinyServer(function(input, output) {
@@ -10,7 +11,6 @@ shinyServer(function(input, output) {
   output$map <- renderLeaflet({
     # data for all players
     player.data <- read.csv("data/All_Players_Data.csv")  #From OrganizeData, need to write a csv for this.
-    
     # data for each individual college
     college.data <- read.csv("Data/map.college.data.csv", stringsAsFactors = FALSE)
     if (input$player != ""){
