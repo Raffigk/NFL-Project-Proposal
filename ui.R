@@ -100,9 +100,10 @@ shinyUI(
             sliderInput(inputId = "round", "Choose the Round(s)",
               min = 1, max = 12,  value = c(1, 12), sep = ""),
             #Select Team Type
-            selectInput(inputId = "GenPos", "Position:", choices = c('Quarterback(O)' = 'QB', 'Running Back' = 'RB', 'Tight End' = 'TE',
-                                                                  'Wide Receiver' = 'WR', 'Fullback' = 'FB','Cornerback' = 'CB', 
-                                                                  'Defensive End' = 'DE', 'Linebacker' = 'LB', 'Defensive Tackle' = 'NT',
+            selectInput(inputId = "GenPos", "Position:", choices = c('Quarterback(O)' = 'QB', 'Running Back(O)' = 'RB', 'Tight End(O)' = 'TE',
+                                                                  'Wide Receiver(O)' = 'WR', 'Fullback(O)' = 'FB', 'Center(O)' = 'C',"Guard(O)" = 'G','Tackle(O)' = 'T',
+                                                                  'Kicker(ST)'= 'K','Punter(ST)' = 'P','Long Snapper(O)' = 'LS','Cornerback(D)' = 'CB', 
+                                                                  'Defensive End(D)' = 'DE', 'Linebacker(D)' = 'LB', 'Defensive Tackle(D)' = 'NT',
                                                                   'All' = 'All'), selected = "All")
   
 
