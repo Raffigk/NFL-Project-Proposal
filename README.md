@@ -1,6 +1,6 @@
 # NFL-Project-Proposal
 
-In this final project, we introduce a interactive platform we built using R. The Shiny application we built can be seen [here](https://michellewho.shinyapps.io/NFL-Project-Proposal/), or directly from this link: `https://michellewho.shinyapps.io/NFL-Project-Proposal/`.
+In this final project, we introduce a interactive platform we built using R. The Shiny application we built can be seen [here](https://raffigk.shinyapps.io/NFL-Project-Proposal/), or directly from this link: `https://raffigk.shinyapps.io/NFL-Project-Proposal/`.
 
 ## Components of our Application
 
